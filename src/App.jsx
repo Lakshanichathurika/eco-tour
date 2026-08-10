@@ -1,26 +1,35 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Stats from "./components/Stats";
-import WhyChooseUs from "./components/WhyChooseUs";
-import Destinations from "./components/Destinations";
-import Process from "./components/Process";
-import Testimonials from "./components/Testimonials";
-import CTA from "./components/CTA";
-import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import Destination from "./pages/Destination";
+import PlanTrip from "./pages/PlanTrip";
+import MyTrips from "./pages/MyTrips";
+import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 function App() {
   return (
-    <>
-      <Navbar />
-      <Hero />
-      <Stats />
-      <WhyChooseUs />
-      <Destinations />
-      <Process />
-      <Testimonials/>
-      <CTA />
-      <Footer/>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+
+        <Route path="/destination" element={<Destination />} />
+        <Route path="/destination/:id" element={<Destination />} />
+
+        <Route path="/plantrip" element={<PlanTrip />} />
+
+        <Route path="/mytrips" element={<MyTrips />} />
+
+        <Route path="/dashboard" element={<Dashboard />} />
+
+        <Route path="/login" element={<Login />} />
+
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/viewall" element={<Destination />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

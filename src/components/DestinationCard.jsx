@@ -1,44 +1,35 @@
+import React from "react";
 import { MapPin } from "lucide-react";
 
-export default function DestinationCard({
-  image,
-  title,
-  location,
-  description,
-}) {
+export default function DestinationCard({ image, title, location, description, onLearnMore, onClickMain }) {
+  const handleKey = (e) => {
+    if (e.key === "Enter" && onClickMain) onClickMain();
+  };
+
   return (
-    <div className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-2xl hover:-translate-y-2 duration-300">
+    <div className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl hover:-translate-y-2 duration-300 flex flex-col h-full">
 
-      <img
-        src={image}
-        alt={title}
-        className="w-full h-56 object-cover"
-      />
+      <div role="link" tabIndex={0} onClick={onClickMain} onKeyDown={handleKey} className="cursor-pointer">
+        <img src={image} alt={title} className="w-full h-64 object-cover" />
+      </div>
 
-      <div className="p-5">
+      <div className="p-6 flex flex-col flex-1">
 
-        <h3 className="text-xl font-bold">
-          {title}
-        </h3>
+        <h3 className="text-2xl font-bold cursor-pointer" onClick={onClickMain} onKeyDown={handleKey} tabIndex={0} role="link">{title}</h3>
 
-        <div className="flex items-center gap-2 text-green-700 text-sm mt-2">
-
-          <MapPin size={16} />
-
+        <div className="flex items-center gap-2 text-green-700 mt-3">
+          <MapPin size={18} />
           <span>{location}</span>
-
         </div>
 
-         {/* Description */}
-        <p className="mt-4 text-[14px] leading-6 text-gray-500 flex-grow">
-          {description}
-        </p>
+        <p className="mt-5 text-gray-500 leading-8 flex-grow">{description}</p>
 
-        <button className="mt-6 text-green-700 font-semibold hover:text-green-900">
-
-          Learn More →
-
-        </button>
+        <button
+  onClick={onLearnMore}
+  className="mt-auto pt-6 text-green-700 font-semibold hover:text-green-900"
+>
+  Learn More →
+</button>
 
       </div>
 
