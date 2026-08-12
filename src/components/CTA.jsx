@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 
-console.log("test commit console log ")
+
 export default function CTA() {
   return (
     <section className="bg-[#F7FBF8] pt-24 pb-24">
