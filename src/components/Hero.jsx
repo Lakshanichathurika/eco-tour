@@ -9,39 +9,27 @@ function Hero() {
       }}
     >
       <div className="w-full h-full bg-black/40 flex flex-col justify-center items-center text-center px-5">
-
         <h1 className="text-white text-6xl md:text-8xl font-serif leading-tight">
-
           Plane Your Eco Journey
           <br />
           In Sri Lanka
-
         </h1>
 
         <p className="text-gray-200 mt-8 max-w-4xl text-xl leading-9">
-
           Discover Sri Lanka's heritage, hills, and beaches in one journey—from
           Sigiriya's ancient wonders to Kandy's culture, Ella's tea hills,
           Yala's wildlife, and Galle's coast.
-
         </p>
 
         <div className="mt-12 flex gap-6 flex-wrap justify-center">
-
           <button className="bg-yellow-400 hover:bg-yellow-500 text-black px-8 py-4 rounded-full text-lg font-semibold">
-
             Plane My Trip →
-
           </button>
 
           <button className="bg-white/20 backdrop-blur-md border border-white text-white px-8 py-4 rounded-full text-lg">
-
             Explore Destinations
-
           </button>
-
         </div>
-
       </div>
     </section>
   );

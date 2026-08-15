@@ -5,7 +5,7 @@ function Navbar() {
     `px-3 py-2 rounded-full transition ${
       isActive
         ? "bg-[#2E6B4F] text-white shadow-md"
-        : "text-stone-800 hover:bg-white hover:text-[#2E6B4F]"
+        : "text-stone-800 hover:bg-[#13884C] hover:text-white"
     }`;
 
   return (

@@ -2,8 +2,7 @@ const steps = [
   {
     id: "01",
     title: "Enter Preferences",
-    description:
-      "Tell us your interests, budget, and how many days you have.",
+    description: "Tell us your interests, budget, and how many days you have.",
   },
   {
     id: "02",
@@ -23,16 +22,11 @@ export default function Process() {
   return (
     <section className="bg-[#F7FBF8] pt-24 pb-32">
       <div className="max-w-7xl mx-auto px-8">
-
         {/* Heading */}
         <div className="text-center">
-          <p className="text-[#2E6B4F] text-sm font-semibold">
-            Simple Process
-          </p>
+          <p className="text-[#2E6B4F] text-sm font-semibold">Simple Process</p>
 
-          <h2 className="text-[42px] font-bold mt-2">
-            How It Work
-          </h2>
+          <h2 className="text-[42px] font-bold mt-2">How It Work</h2>
 
           <p className="text-gray-500 text-sm mt-4">
             Three simple steps to your perfectly planned eco-adventure.
@@ -41,12 +35,10 @@ export default function Process() {
 
         {/* Timeline */}
         <div className="relative mt-24">
-
           {/* Center Line */}
           <div className="hidden md:block absolute top-6 left-[110px] right-[110px] h-[1.5px] bg-gray-300"></div>
 
           <div className="flex justify-between relative z-10">
-
             {steps.map((step) => (
               <div
                 key={step.id}
@@ -58,9 +50,7 @@ export default function Process() {
                 </div>
 
                 {/* Title */}
-                <h3 className="mt-8 text-[22px] font-bold">
-                  {step.title}
-                </h3>
+                <h3 className="mt-8 text-[22px] font-bold">{step.title}</h3>
 
                 {/* Description */}
                 <p className="mt-3 text-[15px] leading-6 text-gray-500">
@@ -68,9 +58,7 @@ export default function Process() {
                 </p>
               </div>
             ))}
-
           </div>
-
         </div>
       </div>
     </section>

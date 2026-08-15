@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import { MdDelete } from "react-icons/md";
+import { FaTimes } from "react-icons/fa";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Destination from "./pages/Destination";

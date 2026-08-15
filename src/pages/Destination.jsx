@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import destinations from "../data/destinations";
@@ -8,7 +8,6 @@ import DestinationPopup from "../components/DestinationPopup";
 
 export default function Destination() {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [selectedDestination, setSelectedDestination] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedProvince, setSelectedProvince] = useState("All Provinces");
@@ -31,7 +30,8 @@ export default function Destination() {
       item.location.toLowerCase().includes(query) ||
       item.description.toLowerCase().includes(query);
     const matchesProvince =
-      selectedProvince === "All Provinces" || item.location === selectedProvince;
+      selectedProvince === "All Provinces" ||
+      item.location === selectedProvince;
     const matchesType =
       selectedType === "All Types" || item.type === selectedType;
 
@@ -46,7 +46,9 @@ export default function Destination() {
           <div className="max-w-7xl mx-auto px-6">
             <main className="max-w-7xl mx-auto px-6 py-12">
               <h1 className="text-3xl font-bold mb-4">Destinations</h1>
-              <p className="text-gray-600">Search and explore our featured destinations.</p>
+              <p className="text-gray-600">
+                Search and explore our featured destinations.
+              </p>
             </main>
 
             <div className="mb-10 grid gap-4 lg:grid-cols-[minmax(0,1fr)_240px_240px]">
@@ -116,7 +118,7 @@ export default function Destination() {
                       title={item.title}
                       location={item.location}
                       description={item.description}
-                      onClickMain={() => navigate(`/destination/${index}`)}
+                      onClickMain={() => setSelectedDestination(item)}
                       onLearnMore={() => setSelectedDestination(item)}
                     />
                   </div>
@@ -168,7 +170,9 @@ export default function Destination() {
             alt={destination.title}
             className="w-full h-96 object-cover rounded-2xl mb-8"
           />
-          <p className="text-lg text-gray-600 leading-8">{destination.description}</p>
+          <p className="text-lg text-gray-600 leading-8">
+            {destination.description}
+          </p>
         </div>
       </section>
       <Footer />
