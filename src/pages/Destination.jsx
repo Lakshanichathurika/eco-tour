@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import destinations from "../data/destinations";
+import { getDestinations, getDestinationById } from "../lib/api";
 import DestinationCard from "../components/DestinationCard";
 import DestinationPopup from "../components/DestinationPopup";
 
@@ -12,6 +12,22 @@ export default function Destination() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedProvince, setSelectedProvince] = useState("All Provinces");
   const [selectedType, setSelectedType] = useState("All Types");
+  const [destinations, setDestinations] = useState([]);
+  const [detailDestination, setDetailDestination] = useState(undefined);
+
+  useEffect(() => {
+    if (id !== undefined) return;
+    getDestinations()
+      .then(setDestinations)
+      .catch(() => setDestinations([]));
+  }, [id]);
+
+  useEffect(() => {
+    if (id === undefined) return;
+    getDestinationById(id)
+      .then(setDetailDestination)
+      .catch(() => setDetailDestination(null));
+  }, [id]);
 
   const provinces = [
     "All Provinces",
@@ -142,7 +158,21 @@ export default function Destination() {
     );
   }
 
-  const destination = destinations[Number(id)];
+  const destination = detailDestination;
+
+  if (destination === undefined) {
+    return (
+      <>
+        <Navbar />
+        <section className="bg-stone-50 py-24">
+          <div className="max-w-7xl mx-auto px-6 py-12">
+            <h1 className="text-3xl font-bold mb-4">Loading...</h1>
+          </div>
+        </section>
+        <Footer />
+      </>
+    );
+  }
 
   if (!destination) {
     return (

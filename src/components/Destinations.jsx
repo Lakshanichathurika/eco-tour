@@ -1,12 +1,19 @@
 import DestinationCard from "./DestinationCard";
 import { useNavigate, Link } from "react-router-dom";
-import destinations from "../data/destinations";
+import { getDestinations } from "../lib/api";
 import DestinationPopup from "./DestinationPopup";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Destinations() {
   const [selectedDestination, setSelectedDestination] = useState(null);
+  const [destinations, setDestinations] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getDestinations()
+      .then(setDestinations)
+      .catch(() => setDestinations([]));
+  }, []);
   return (
     <section className="bg-stone-50 py-24">
       <div className="max-w-7xl mx-auto px-6">
