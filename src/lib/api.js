@@ -37,3 +37,28 @@ export async function getNearbyPlaces(lat, lng) {
   if (!json.success) throw new Error(json.message || "Failed to fetch nearby places");
   return json.data;
 }
+
+export async function saveTrip(payload) {
+  const res = await fetch(`${API_BASE}/trips`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  const json = await res.json();
+  if (!json.success) throw new Error(json.message || "Failed to save trip");
+  return json.data;
+}
+
+export async function getTrips(clientId) {
+  const res = await fetch(`${API_BASE}/trips?client_id=${encodeURIComponent(clientId)}`);
+  const json = await res.json();
+  if (!json.success) throw new Error(json.message || "Failed to fetch trips");
+  return json.data;
+}
+
+export async function deleteTrip(id) {
+  const res = await fetch(`${API_BASE}/trips/${id}`, { method: "DELETE" });
+  const json = await res.json();
+  if (!json.success) throw new Error(json.message || "Failed to delete trip");
+  return json.data;
+}

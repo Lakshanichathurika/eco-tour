@@ -5,6 +5,7 @@ const destinationRoutes = require("./routes/destinationRoutes");
 const recommendationRoutes = require("./routes/recommendationRoutes");
 const weatherRoutes = require("./routes/weatherRoutes");
 const placesRoutes = require("./routes/placesRoutes");
+const tripRoutes = require("./routes/tripRoutes");
 const notFound = require("./middleware/notFound");
 const errorHandler = require("./middleware/errorHandler");
 
@@ -23,6 +24,7 @@ app.use("/api/destinations", destinationRoutes);
 app.use("/api/recommendations", recommendationRoutes);
 app.use("/api/weather", weatherRoutes);
 app.use("/api/places", placesRoutes);
+app.use("/api/trips", tripRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

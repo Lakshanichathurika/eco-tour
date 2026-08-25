@@ -1,72 +1,60 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { MdDelete } from "react-icons/md";
+import { getTrips, deleteTrip } from "../lib/api";
+import { getClientId } from "../utils/clientId";
 
-const initialTrips = [
-  {
-    id: 1,
-    title: "5-Day Eco Journey - Jun",
-    days: "5 days",
-    price: "LKR 168,000",
-    distance: "205 km",
-    image:
-      "src/assets/ella.jpg",
-  },
-  {
-    id: 2,
-    title: "5-Day Eco Journey - Jun",
-    days: "5 days",
-    price: "LKR 168,000",
-    distance: "205 km",
-    image:
-      "src/assets/sigiriya.jpg",
-  },
-  {
-    id: 3,
-    title: "5-Day Eco Journey - Jun",
-    days: "5 days",
-    price: "LKR 168,000",
-    distance: "205 km",
-    image:
-      "src/assets/sinharaja.jpg",
-  },
-  {
-    id: 4,
-    title: "5-Day Eco Journey - Jun",
-    days: "5 days",
-    price: "LKR 168,000",
-    distance: "205 km",
-    image:
-      "src/assets/yala.jpg",
-  },
-  {
-    id: 5,
-    title: "5-Day Eco Journey - Jun",
-    days: "5 days",
-    price: "LKR 168,000",
-    distance: "205 km",
-    image:
-      "src/assets/ella.jpg",
-  },
-  {
-    id: 6,
-    title: "5-Day Eco Journey - Jun",
-    days: "5 days",
-    price: "LKR 168,000",
-    distance: "205 km",
-    image:
-      "src/assets/sinharaja.jpg",  
-  },
+// No per-trip photo exists yet (itinerary stops don't carry an image field),
+// so real trips cycle through the same placeholder set the old hardcoded
+// version used, by index.
+const PLACEHOLDER_IMAGES = [
+  "src/assets/ella.jpg",
+  "src/assets/sigiriya.jpg",
+  "src/assets/sinharaja.jpg",
+  "src/assets/yala.jpg",
 ];
+
+const MONTH_ABBREV = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+];
+
+function toCard(trip, index) {
+  const createdAt = new Date(trip.created_at);
+  const duration = trip.preferences?.duration;
+  return {
+    id: trip._id,
+    title: `${duration}-Day Eco Journey - ${MONTH_ABBREV[createdAt.getMonth()]}`,
+    days: `${duration} days`,
+    price: `LKR ${Math.round(
+      (trip.total_estimated_cost_lkr || 0) + (trip.estimated_transport_cost_lkr || 0)
+    ).toLocaleString()}`,
+    distance: `${Math.round(trip.total_distance_km || 0)} km`,
+    image: PLACEHOLDER_IMAGES[index % PLACEHOLDER_IMAGES.length],
+  };
+}
 
 function MyTrips() {
   const navigate = useNavigate();
-  const [trips, setTrips] = useState(initialTrips);
+  const [trips, setTrips] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const handleDelete = (id) => {
-    setTrips((currentTrips) => currentTrips.filter((trip) => trip.id !== id));
+  useEffect(() => {
+    getTrips(getClientId())
+      .then((data) => setTrips(data.map(toCard)))
+      .catch((err) => console.warn("Failed to load trips:", err))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      await deleteTrip(id);
+      setTrips((currentTrips) => currentTrips.filter((trip) => trip.id !== id));
+    } catch (err) {
+      console.warn("Failed to delete trip:", err);
+    }
   };
 
   return (
@@ -95,7 +83,11 @@ function MyTrips() {
             </button>
           </div>
 
-          {trips.length === 0 ? (
+          {loading ? (
+            <div className="rounded-2xl border border-dashed border-[#b5c8bf] bg-[#f8f8f8] p-12 text-center text-[#3a524a]">
+              Loading your trips...
+            </div>
+          ) : trips.length === 0 ? (
             <div className="rounded-2xl border border-dashed border-[#b5c8bf] bg-[#f8f8f8] p-12 text-center text-[#3a524a]">
               No trips yet. Create a new one to get started.
             </div>

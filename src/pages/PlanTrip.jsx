@@ -9,7 +9,8 @@ import DirectionsPanel from "../components/DirectionsPanel";
 import StopsPanel from "../components/StopsPanel";
 import WeatherBadge from "../components/WeatherBadge";
 import useWeatherForItinerary from "../hooks/useWeatherForItinerary";
-import { postRecommendations } from "../lib/api";
+import { postRecommendations, saveTrip } from "../lib/api";
+import { getClientId } from "../utils/clientId";
 
 const INTERESTS = ["wildlife", "hiking", "culture", "beach"];
 const SEASONS = [
@@ -86,20 +87,35 @@ function PlanTrip() {
 
     setSubmitting(true);
     try {
-      const response = await postRecommendations({
+      const payload = {
         budget: budgetLkrToTier(budgetLkr),
         duration: Number(duration),
         interests,
         travelSeason,
         vehicle_type: vehicleType,
         travelers: Number(travelers),
-      });
+      };
+      const response = await postRecommendations(payload);
       if (!response.success) {
         setError(response.message || "Something went wrong.");
         setResults(null);
       } else {
         setResults(response);
         setDirectionsLegs([]);
+
+        if (response.itinerary?.length > 0) {
+          // Auto-save to trip history — no "Save trip" affordance exists in
+          // this UI, so a failed save here shouldn't block or alarm the user
+          // over a result that already rendered successfully.
+          saveTrip({
+            client_id: getClientId(),
+            preferences: payload,
+            itinerary: response.itinerary,
+            total_estimated_cost_lkr: response.total_estimated_cost_lkr,
+            estimated_transport_cost_lkr: response.estimated_transport_cost_lkr,
+            total_distance_km: response.total_distance_km,
+          }).catch((err) => console.warn("Failed to save trip:", err));
+        }
       }
     } catch (err) {
       setError("Could not reach the recommendation service.");
