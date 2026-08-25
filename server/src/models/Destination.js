@@ -26,6 +26,7 @@ const destinationSchema = new mongoose.Schema(
     imageUrl: { type: String, required: true },
     source: { type: String, default: "" },
     estimated_cost_lkr: { type: Number, required: true, min: 0 },
+    cost_breakdown: { type: String, default: "" },
   },
   { timestamps: true }
 );

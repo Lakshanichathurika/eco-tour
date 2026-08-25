@@ -1,3 +1,7 @@
+// Cost breakdown figures in destinationsSeed.json are approximate and should be
+// verified against official park/site fee schedules before final submission —
+// see Dept. of Wildlife Conservation, UNESCO site authorities, or individual
+// tour operator listings for current rates.
 require("dotenv").config();
 const mongoose = require("mongoose");
 const connectDB = require("./config/db");

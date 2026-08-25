@@ -205,6 +205,7 @@ function buildItinerary(rankedDestinations, totalDays) {
       recommended_stay_days: destination.min_recommended_days,
       coordinates: destination.coordinates,
       estimated_cost_lkr: destination.estimated_cost_lkr,
+      cost_breakdown: destination.cost_breakdown,
     });
 
     visitOrder += 1;

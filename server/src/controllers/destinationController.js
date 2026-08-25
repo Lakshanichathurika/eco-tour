@@ -28,6 +28,7 @@ function toDestinationDTO(doc) {
     conservation_notes: doc.conservation_notes,
     source: doc.source,
     estimated_cost_lkr: doc.estimated_cost_lkr,
+    cost_breakdown: doc.cost_breakdown,
   };
 }
 

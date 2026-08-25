@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ChevronDown } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import DestinationCard from "../components/DestinationCard";
@@ -57,6 +58,7 @@ function PlanTrip() {
   const [results, setResults] = useState(null);
   const [travelMode, setTravelMode] = useState("DRIVING");
   const [directionsLegs, setDirectionsLegs] = useState([]);
+  const [expandedStopId, setExpandedStopId] = useState(null);
   const weatherByDestinationId = useWeatherForItinerary(results?.itinerary);
 
   const toggleInterest = (value) => {
@@ -327,9 +329,39 @@ function PlanTrip() {
                         <p className="text-sm text-gray-500 mt-2">
                           {stop.notes}
                         </p>
-                        <p className="text-sm text-green-700 font-semibold mt-2">
-                          Est. cost: Rs {stop.estimated_cost_lkr.toLocaleString()}
-                        </p>
+                        {stop.cost_breakdown ? (
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setExpandedStopId(
+                                expandedStopId === stop.destination_id
+                                  ? null
+                                  : stop.destination_id
+                              )
+                            }
+                            className="flex items-center gap-1 text-sm text-green-700 font-semibold mt-2"
+                          >
+                            Est. cost: Rs {stop.estimated_cost_lkr.toLocaleString()}
+                            <ChevronDown
+                              size={16}
+                              className={`transition-transform ${
+                                expandedStopId === stop.destination_id ? "rotate-180" : ""
+                              }`}
+                            />
+                          </button>
+                        ) : (
+                          <p className="text-sm text-green-700 font-semibold mt-2">
+                            Est. cost: Rs {stop.estimated_cost_lkr.toLocaleString()}
+                          </p>
+                        )}
+                        {expandedStopId === stop.destination_id && stop.cost_breakdown && (
+                          <div className="mt-2 text-sm text-gray-600 bg-stone-50 rounded-xl p-3">
+                            <p>{stop.cost_breakdown}</p>
+                            <p className="text-xs text-gray-400 mt-1">
+                              Approximate — verify current rates before finalizing.
+                            </p>
+                          </div>
+                        )}
                         <div className="mt-2">
                           <WeatherBadge weather={weatherByDestinationId[stop.destination_id]} />
                         </div>
