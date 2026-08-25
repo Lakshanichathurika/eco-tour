@@ -18,6 +18,12 @@ const SEASONS = [
   { value: "Oct-Nov", label: "Oct - Nov" },
   { value: "Year-round", label: "Year-round" },
 ];
+const VEHICLE_TYPES = [
+  { value: "car", label: "Car" },
+  { value: "bike", label: "Bike" },
+  { value: "van", label: "Van" },
+  { value: "bus", label: "Bus" },
+];
 
 // Maps the Rs 20,000-150,000 slider onto the rule engine's low/medium/high
 // budget tiers — an explainable boundary rule, same style as the backend rules.
@@ -30,6 +36,7 @@ function budgetLkrToTier(value) {
 function PlanTrip() {
   const [budgetLkr, setBudgetLkr] = useState(60000);
   const [duration, setDuration] = useState(3);
+  const [vehicleType, setVehicleType] = useState("car");
   const [interests, setInterests] = useState([]);
   const [travelSeason, setTravelSeason] = useState("no_preference");
   const [submitting, setSubmitting] = useState(false);
@@ -65,6 +72,7 @@ function PlanTrip() {
         duration: Number(duration),
         interests,
         travelSeason,
+        vehicle_type: vehicleType,
       });
       if (!response.success) {
         setError(response.message || "Something went wrong.");
@@ -134,6 +142,24 @@ function PlanTrip() {
                 onChange={(e) => setDuration(e.target.value)}
                 className="w-full rounded-full border border-stone-200 bg-white px-5 py-3 text-stone-900 shadow-sm outline-none focus:border-green-700 focus:ring-2 focus:ring-green-200"
               />
+            </div>
+
+            <div>
+              <label className="block font-semibold mb-2" htmlFor="vehicle-select">
+                Vehicle
+              </label>
+              <select
+                id="vehicle-select"
+                value={vehicleType}
+                onChange={(e) => setVehicleType(e.target.value)}
+                className="w-full rounded-full border border-stone-200 bg-white px-5 py-3 text-stone-900 shadow-sm outline-none focus:border-green-700 focus:ring-2 focus:ring-green-200"
+              >
+                {VEHICLE_TYPES.map((v) => (
+                  <option key={v.value} value={v.value}>
+                    {v.label}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div>
@@ -229,15 +255,27 @@ function PlanTrip() {
                 <div className="mt-16">
                   <div className="flex items-end justify-between mb-8 flex-wrap gap-4">
                     <h2 className="text-3xl font-bold">Suggested Itinerary</h2>
-                    <p className="text-gray-600">
-                      <span className="font-semibold text-green-700">
-                        {results.total_places}
-                      </span>{" "}
-                      places &middot; est.{" "}
-                      <span className="font-semibold text-green-700">
-                        Rs {results.total_estimated_cost_lkr.toLocaleString()}
-                      </span>
-                    </p>
+                    <div className="text-gray-600 text-right">
+                      <p>
+                        <span className="font-semibold text-green-700">
+                          {results.total_places}
+                        </span>{" "}
+                        places &middot; entry &amp; activities: est.{" "}
+                        <span className="font-semibold text-green-700">
+                          Rs {results.total_estimated_cost_lkr.toLocaleString()}
+                        </span>
+                      </p>
+                      <p className="mt-1">
+                        Estimated transport (
+                        {VEHICLE_TYPES.find((v) => v.value === vehicleType)?.label}): est.{" "}
+                        <span className="font-semibold text-green-700">
+                          Rs {Math.round(results.estimated_transport_cost_lkr).toLocaleString()}
+                        </span>{" "}
+                        <span className="text-xs text-gray-400">
+                          ({results.total_distance_km.toFixed(1)} km, straight-line estimate)
+                        </span>
+                      </p>
+                    </div>
                   </div>
 
                   <div className="mb-4">
