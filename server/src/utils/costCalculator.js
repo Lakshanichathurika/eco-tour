@@ -7,17 +7,20 @@
 // (fuel) and ntc.gov.lk (bus fares) before reusing these numbers beyond this
 // project.
 //
-// car/bike/van = private vehicle, fuel-based cost. bus/train = public
-// transport, ticket-fare-based cost, not fuel consumption.
+// "fuel" type = private vehicle, cost paid directly by traveler for fuel.
+// "fixed_rate" type = public transport, cost is a regulated ticket fare
+// independent of fuel consumption.
 const VEHICLE_RATES = {
   car: { type: "fuel", efficiency_km_per_liter: 12, price_per_liter: 414 },
   bike: { type: "fuel", efficiency_km_per_liter: 45, price_per_liter: 414 },
   van: { type: "fuel", efficiency_km_per_liter: 10, price_per_liter: 382 },
+  // A chartered/hired coach — same diesel price as van, lower efficiency.
+  private_bus: { type: "fuel", efficiency_km_per_liter: 4, price_per_liter: 382 },
   // Real NTC bus fares are set by a distance-stage table, not a flat per-km
   // rate. This is a documented approximation (minimum fare + an average per-km
   // rate for normal service) — not the actual stage table, which is out of
   // scope for this project.
-  bus: { type: "fixed_rate", min_fare: 34, rate_per_km: 4.5 },
+  public_bus: { type: "fixed_rate", min_fare: 34, rate_per_km: 4.5 },
   train: {
     type: "fixed_rate",
     min_fare: 40,

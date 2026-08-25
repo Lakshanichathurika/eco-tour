@@ -18,13 +18,25 @@ const SEASONS = [
   { value: "Oct-Nov", label: "Oct - Nov" },
   { value: "Year-round", label: "Year-round" },
 ];
-const VEHICLE_TYPES = [
-  { value: "car", label: "Car" },
-  { value: "bike", label: "Bike" },
-  { value: "van", label: "Van" },
-  { value: "bus", label: "Bus" },
-  { value: "train", label: "Train" },
+const VEHICLE_TYPE_GROUPS = [
+  {
+    group: "Private Vehicle",
+    options: [
+      { value: "car", label: "Car" },
+      { value: "bike", label: "Bike" },
+      { value: "van", label: "Van" },
+      { value: "private_bus", label: "Private Bus (chartered/hired coach)" },
+    ],
+  },
+  {
+    group: "Public Transport",
+    options: [
+      { value: "public_bus", label: "Public Bus" },
+      { value: "train", label: "Train" },
+    ],
+  },
 ];
+const VEHICLE_TYPE_OPTIONS = VEHICLE_TYPE_GROUPS.flatMap((g) => g.options);
 
 // Maps the Rs 20,000-150,000 slider onto the rule engine's low/medium/high
 // budget tiers — an explainable boundary rule, same style as the backend rules.
@@ -155,10 +167,14 @@ function PlanTrip() {
                 onChange={(e) => setVehicleType(e.target.value)}
                 className="w-full rounded-full border border-stone-200 bg-white px-5 py-3 text-stone-900 shadow-sm outline-none focus:border-green-700 focus:ring-2 focus:ring-green-200"
               >
-                {VEHICLE_TYPES.map((v) => (
-                  <option key={v.value} value={v.value}>
-                    {v.label}
-                  </option>
+                {VEHICLE_TYPE_GROUPS.map((g) => (
+                  <optgroup key={g.group} label={g.group}>
+                    {g.options.map((v) => (
+                      <option key={v.value} value={v.value}>
+                        {v.label}
+                      </option>
+                    ))}
+                  </optgroup>
                 ))}
               </select>
             </div>
@@ -268,7 +284,7 @@ function PlanTrip() {
                       </p>
                       <p className="mt-1">
                         Estimated transport (
-                        {VEHICLE_TYPES.find((v) => v.value === vehicleType)?.label}): est.{" "}
+                        {VEHICLE_TYPE_OPTIONS.find((v) => v.value === vehicleType)?.label}): est.{" "}
                         <span className="font-semibold text-green-700">
                           Rs {Math.round(results.estimated_transport_cost_lkr).toLocaleString()}
                         </span>{" "}
