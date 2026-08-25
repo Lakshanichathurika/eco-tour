@@ -5,6 +5,7 @@ import DestinationCard from "../components/DestinationCard";
 import MapView from "../components/MapView";
 import TravelModeSelector from "../components/TravelModeSelector";
 import DirectionsPanel from "../components/DirectionsPanel";
+import StopsPanel from "../components/StopsPanel";
 import WeatherBadge from "../components/WeatherBadge";
 import useWeatherForItinerary from "../hooks/useWeatherForItinerary";
 import { postRecommendations } from "../lib/api";
@@ -253,6 +254,8 @@ function PlanTrip() {
                   </div>
 
                   <DirectionsPanel legs={directionsLegs} travelMode={travelMode} />
+
+                  <StopsPanel legs={directionsLegs} itinerary={results.itinerary} />
 
                   <ol className="space-y-4">
                     {results.itinerary.map((stop, i) => (

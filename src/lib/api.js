@@ -31,9 +31,9 @@ export async function getWeather(lat, lng) {
   return json.data;
 }
 
-export async function getNearbyRestStops(lat, lng) {
+export async function getNearbyPlaces(lat, lng) {
   const res = await fetch(`${API_BASE}/places/nearby?lat=${lat}&lng=${lng}`);
   const json = await res.json();
-  if (!json.success) throw new Error(json.message || "Failed to fetch rest stops");
+  if (!json.success) throw new Error(json.message || "Failed to fetch nearby places");
   return json.data;
 }
