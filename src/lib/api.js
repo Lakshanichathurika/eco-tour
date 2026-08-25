@@ -23,3 +23,17 @@ export async function postRecommendations(payload) {
   });
   return res.json();
 }
+
+export async function getWeather(lat, lng) {
+  const res = await fetch(`${API_BASE}/weather?lat=${lat}&lng=${lng}`);
+  const json = await res.json();
+  if (!json.success) throw new Error(json.message || "Failed to fetch weather");
+  return json.data;
+}
+
+export async function getNearbyRestStops(lat, lng) {
+  const res = await fetch(`${API_BASE}/places/nearby?lat=${lat}&lng=${lng}`);
+  const json = await res.json();
+  if (!json.success) throw new Error(json.message || "Failed to fetch rest stops");
+  return json.data;
+}

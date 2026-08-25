@@ -3,6 +3,10 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import DestinationCard from "../components/DestinationCard";
 import MapView from "../components/MapView";
+import TravelModeSelector from "../components/TravelModeSelector";
+import DirectionsPanel from "../components/DirectionsPanel";
+import WeatherBadge from "../components/WeatherBadge";
+import useWeatherForItinerary from "../hooks/useWeatherForItinerary";
 import { postRecommendations } from "../lib/api";
 
 const INTERESTS = ["wildlife", "hiking", "culture", "beach"];
@@ -30,6 +34,9 @@ function PlanTrip() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
   const [results, setResults] = useState(null);
+  const [travelMode, setTravelMode] = useState("DRIVING");
+  const [directionsLegs, setDirectionsLegs] = useState([]);
+  const weatherByDestinationId = useWeatherForItinerary(results?.itinerary);
 
   const toggleInterest = (value) => {
     setInterests((prev) =>
@@ -63,6 +70,7 @@ function PlanTrip() {
         setResults(null);
       } else {
         setResults(response);
+        setDirectionsLegs([]);
       }
     } catch (err) {
       setError("Could not reach the recommendation service.");
@@ -231,9 +239,20 @@ function PlanTrip() {
                     </p>
                   </div>
 
-                  <div className="mb-8">
-                    <MapView itinerary={results.itinerary} />
+                  <div className="mb-4">
+                    <TravelModeSelector value={travelMode} onChange={setTravelMode} />
                   </div>
+
+                  <div className="mb-8">
+                    <MapView
+                      itinerary={results.itinerary}
+                      travelMode={travelMode}
+                      onDirectionsChange={setDirectionsLegs}
+                      weatherByDestinationId={weatherByDestinationId}
+                    />
+                  </div>
+
+                  <DirectionsPanel legs={directionsLegs} travelMode={travelMode} />
 
                   <ol className="space-y-4">
                     {results.itinerary.map((stop, i) => (
@@ -253,6 +272,9 @@ function PlanTrip() {
                         <p className="text-sm text-green-700 font-semibold mt-2">
                           Est. cost: Rs {stop.estimated_cost_lkr.toLocaleString()}
                         </p>
+                        <div className="mt-2">
+                          <WeatherBadge weather={weatherByDestinationId[stop.destination_id]} />
+                        </div>
                       </li>
                     ))}
                   </ol>

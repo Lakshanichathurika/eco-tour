@@ -3,6 +3,8 @@ const path = require("path");
 const cors = require("cors");
 const destinationRoutes = require("./routes/destinationRoutes");
 const recommendationRoutes = require("./routes/recommendationRoutes");
+const weatherRoutes = require("./routes/weatherRoutes");
+const placesRoutes = require("./routes/placesRoutes");
 const notFound = require("./middleware/notFound");
 const errorHandler = require("./middleware/errorHandler");
 
@@ -19,6 +21,8 @@ app.use("/images", express.static(path.join(__dirname, "..", "public", "images")
 
 app.use("/api/destinations", destinationRoutes);
 app.use("/api/recommendations", recommendationRoutes);
+app.use("/api/weather", weatherRoutes);
+app.use("/api/places", placesRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
