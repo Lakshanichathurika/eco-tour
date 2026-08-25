@@ -1,0 +1,440 @@
+[
+  {
+    "name": "Yala National Park",
+    "slug": "yala-national-park",
+    "region": "Southern Province",
+    "coordinates": {
+      "lat": 6.3728,
+      "lng": 81.535
+    },
+    "activity_type": "wildlife",
+    "secondary_activities": [],
+    "environmental_sensitivity": "high",
+    "best_season": "Apr-Sep",
+    "best_season_detail": "Feb-Jul (dry season)",
+    "min_recommended_days": 1,
+    "budget_tier": "medium",
+    "conservation_notes": "Known for one of the highest leopard densities in the world; the park closes for part of the year for conservation \u2014 confirm exact dates for the current year.",
+    "description": "Sri Lanka's most visited national park, renowned for having one of the highest leopard densities in the world alongside elephants and sloth bears.",
+    "imageUrl": "http://localhost:5001/images/yala-national-park.jpg",
+    "source": "Sri Lanka Tourism Development Authority; Dept. of Wildlife Conservation",
+    "estimated_cost_lkr": 45000
+  },
+  {
+    "name": "Udawalawe National Park",
+    "slug": "udawalawe-national-park",
+    "region": "Sabaragamuwa/Uva border",
+    "coordinates": {
+      "lat": 6.439,
+      "lng": 80.889
+    },
+    "activity_type": "wildlife",
+    "secondary_activities": [],
+    "environmental_sensitivity": "medium",
+    "best_season": "Apr-Sep",
+    "best_season_detail": "May-Sep (dry season)",
+    "min_recommended_days": 1,
+    "budget_tier": "low",
+    "conservation_notes": "Reliable elephant sightings due to open grassland habitat; lower entry cost than Yala, popular budget-friendly wildlife option.",
+    "description": "Open grassland and scrub around the Udawalawe reservoir offering reliable elephant sightings, with an on-site elephant transit home.",
+    "imageUrl": "http://localhost:5001/images/udawalawe-national-park.jpg",
+    "source": "Dept. of Wildlife Conservation",
+    "estimated_cost_lkr": 18000
+  },
+  {
+    "name": "Sinharaja Forest Reserve",
+    "slug": "sinharaja-forest-reserve",
+    "region": "Sabaragamuwa Province",
+    "coordinates": {
+      "lat": 6.4,
+      "lng": 80.5
+    },
+    "activity_type": "hiking",
+    "secondary_activities": [
+      "wildlife"
+    ],
+    "environmental_sensitivity": "high",
+    "best_season": "Year-round",
+    "best_season_detail": "Jan-Mar, Aug-Sep (drier spells)",
+    "min_recommended_days": 2,
+    "budget_tier": "low",
+    "conservation_notes": "UNESCO World Heritage rainforest with high endemic biodiversity; strict guide requirements and trail restrictions apply.",
+    "description": "A UNESCO World Heritage rainforest and the last major tract of primary tropical rainforest in Sri Lanka, home to high endemic biodiversity.",
+    "imageUrl": "http://localhost:5001/images/sinharaja-forest-reserve.jpg",
+    "source": "UNESCO World Heritage Centre; Forest Department",
+    "estimated_cost_lkr": 22000
+  },
+  {
+    "name": "Horton Plains National Park",
+    "slug": "horton-plains-national-park",
+    "region": "Central Province",
+    "coordinates": {
+      "lat": 6.8096,
+      "lng": 80.8014
+    },
+    "activity_type": "hiking",
+    "secondary_activities": [
+      "wildlife"
+    ],
+    "environmental_sensitivity": "high",
+    "best_season": "Dec-Mar",
+    "best_season_detail": "Jan-Mar (clearest visibility)",
+    "min_recommended_days": 1,
+    "budget_tier": "medium",
+    "conservation_notes": "High-altitude cloud forest and grassland; home to World's End escarpment. Early morning entry recommended before cloud cover sets in.",
+    "description": "A high-altitude cloud forest and grassland plateau home to the sheer World's End escarpment and Baker's Falls.",
+    "imageUrl": "http://localhost:5001/images/horton-plains-national-park.jpg",
+    "source": "Dept. of Wildlife Conservation",
+    "estimated_cost_lkr": 35000
+  },
+  {
+    "name": "Wilpattu National Park",
+    "slug": "wilpattu-national-park",
+    "region": "North Western Province",
+    "coordinates": {
+      "lat": 8.45,
+      "lng": 80.05
+    },
+    "activity_type": "wildlife",
+    "secondary_activities": [],
+    "environmental_sensitivity": "high",
+    "best_season": "Apr-Sep",
+    "best_season_detail": "Feb-Oct (dry season)",
+    "min_recommended_days": 1,
+    "budget_tier": "medium",
+    "conservation_notes": "Sri Lanka's largest national park, known for its natural sand-rimmed lakes (villus) and leopards; reopened in 2010 after a long closure during the conflict period.",
+    "description": "Sri Lanka's largest national park, known for its natural sand-rimmed lakes (villus) and a strong leopard population.",
+    "imageUrl": "http://localhost:5001/images/wilpattu-national-park.jpg",
+    "source": "Dept. of Wildlife Conservation",
+    "estimated_cost_lkr": 42000
+  },
+  {
+    "name": "Minneriya National Park",
+    "slug": "minneriya-national-park",
+    "region": "North Central Province",
+    "coordinates": {
+      "lat": 8.0333,
+      "lng": 80.8833
+    },
+    "activity_type": "wildlife",
+    "secondary_activities": [],
+    "environmental_sensitivity": "medium",
+    "best_season": "Apr-Sep",
+    "best_season_detail": "Jun-Sep (\"The Gathering\" \u2014 elephant herds at the reservoir)",
+    "min_recommended_days": 1,
+    "budget_tier": "medium",
+    "conservation_notes": "Famous for one of Asia's largest elephant gatherings around the Minneriya tank during the dry season.",
+    "description": "Home to 'The Gathering', one of Asia's largest seasonal elephant congregations around the ancient Minneriya tank.",
+    "imageUrl": "http://localhost:5001/images/minneriya-national-park.jpg",
+    "source": "Dept. of Wildlife Conservation; Sri Lanka Tourism Development Authority",
+    "estimated_cost_lkr": 38000
+  },
+  {
+    "name": "Wasgamuwa National Park",
+    "slug": "wasgamuwa-national-park",
+    "region": "Central/North Central border",
+    "coordinates": {
+      "lat": 7.55,
+      "lng": 80.85
+    },
+    "activity_type": "wildlife",
+    "secondary_activities": [],
+    "environmental_sensitivity": "medium",
+    "best_season": "Apr-Sep",
+    "best_season_detail": "May-Sep (dry season)",
+    "min_recommended_days": 1,
+    "budget_tier": "low",
+    "conservation_notes": "Less-visited elephant habitat, promoted as a quieter, lower-cost alternative to Minneriya/Udawalawe.",
+    "description": "A quieter, lower-cost elephant habitat promoted as an alternative to the busier Minneriya and Udawalawe parks.",
+    "imageUrl": "http://localhost:5001/images/wasgamuwa-national-park.jpg",
+    "source": "Dept. of Wildlife Conservation",
+    "estimated_cost_lkr": 16000
+  },
+  {
+    "name": "Kumana National Park",
+    "slug": "kumana-national-park",
+    "region": "Eastern Province",
+    "coordinates": {
+      "lat": 6.65,
+      "lng": 81.65
+    },
+    "activity_type": "wildlife",
+    "secondary_activities": [],
+    "environmental_sensitivity": "high",
+    "best_season": "Apr-Sep",
+    "best_season_detail": "May-Sep (migratory bird breeding season)",
+    "min_recommended_days": 1,
+    "budget_tier": "medium",
+    "conservation_notes": "Adjoins Yala; internationally recognised for migratory water birds nesting in the Kumana mangrove swamp.",
+    "description": "Adjoining Yala, internationally recognised for migratory water birds nesting in the Kumana mangrove swamp.",
+    "imageUrl": "http://localhost:5001/images/kumana-national-park.jpg",
+    "source": "Dept. of Wildlife Conservation",
+    "estimated_cost_lkr": 40000
+  },
+  {
+    "name": "Knuckles Mountain Range",
+    "slug": "knuckles-mountain-range",
+    "region": "Central Province",
+    "coordinates": {
+      "lat": 7.45,
+      "lng": 80.8
+    },
+    "activity_type": "hiking",
+    "secondary_activities": [
+      "wildlife"
+    ],
+    "environmental_sensitivity": "high",
+    "best_season": "Dec-Mar",
+    "best_season_detail": "Jan-Apr (clearer, drier trails)",
+    "min_recommended_days": 2,
+    "budget_tier": "low",
+    "conservation_notes": "UNESCO World Heritage extension site (part of the Central Highlands listing); montane cloud forest with strict trail-guide requirements.",
+    "description": "A UNESCO World Heritage montane cloud forest offering multi-day trekking routes through rugged, biodiverse mountain terrain.",
+    "imageUrl": "http://localhost:5001/images/knuckles-mountain-range.jpg",
+    "source": "UNESCO World Heritage Centre; Forest Department",
+    "estimated_cost_lkr": 20000
+  },
+  {
+    "name": "Ella Rock",
+    "slug": "ella-rock",
+    "region": "Uva Province",
+    "coordinates": {
+      "lat": 6.867,
+      "lng": 81.05
+    },
+    "activity_type": "hiking",
+    "secondary_activities": [],
+    "environmental_sensitivity": "medium",
+    "best_season": "Dec-Mar",
+    "best_season_detail": "Jan-Mar (dry season, clearest views)",
+    "min_recommended_days": 1,
+    "budget_tier": "low",
+    "conservation_notes": "Popular unmarked hiking trail through tea estates and forest; local guides recommended to avoid getting lost on the informal path network.",
+    "description": "An unmarked hiking trail winding through tea estates and forest to a scenic viewpoint above the hill-country town of Ella.",
+    "imageUrl": "http://localhost:5001/images/ella-rock.jpg",
+    "source": "Sri Lanka Tourism Development Authority",
+    "estimated_cost_lkr": 12000
+  },
+  {
+    "name": "Adam's Peak (Sri Pada)",
+    "slug": "adams-peak-sri-pada",
+    "region": "Central/Sabaragamuwa border",
+    "coordinates": {
+      "lat": 6.8096,
+      "lng": 80.4994
+    },
+    "activity_type": "hiking",
+    "secondary_activities": [
+      "culture"
+    ],
+    "environmental_sensitivity": "medium",
+    "best_season": "Dec-Mar",
+    "best_season_detail": "Dec-May (official pilgrimage season)",
+    "min_recommended_days": 1,
+    "budget_tier": "low",
+    "conservation_notes": "Sacred mountain significant to multiple faiths; the main pilgrim route is lit and most active Dec-May, quieter and less maintained outside this season.",
+    "description": "A sacred mountain significant to multiple faiths, climbed via a lit pilgrim staircase to a summit shrine and sunrise viewpoint.",
+    "imageUrl": "http://localhost:5001/images/adams-peak-sri-pada.jpg",
+    "source": "Sri Lanka Tourism Development Authority",
+    "estimated_cost_lkr": 14000
+  },
+  {
+    "name": "Riverston (Riverstone Peak)",
+    "slug": "riverston-riverstone-peak",
+    "region": "Matale District, Central Province",
+    "coordinates": {
+      "lat": 7.48,
+      "lng": 80.75
+    },
+    "activity_type": "hiking",
+    "secondary_activities": [],
+    "environmental_sensitivity": "medium",
+    "best_season": "Dec-Mar",
+    "best_season_detail": "Jan-Apr",
+    "min_recommended_days": 1,
+    "budget_tier": "low",
+    "conservation_notes": "Scenic viewpoint and hiking area within the Knuckles range, known as a cooler, less-crowded alternative to the main Knuckles trails.",
+    "description": "A scenic viewpoint and hiking area within the Knuckles range, known as a cooler, less-crowded alternative to the main trails.",
+    "imageUrl": "http://localhost:5001/images/riverston-riverstone-peak.jpg",
+    "source": "Forest Department",
+    "estimated_cost_lkr": 15000
+  },
+  {
+    "name": "Sigiriya (Lion Rock)",
+    "slug": "sigiriya-lion-rock",
+    "region": "Central Province",
+    "coordinates": {
+      "lat": 7.957,
+      "lng": 80.7603
+    },
+    "activity_type": "culture",
+    "secondary_activities": [
+      "hiking"
+    ],
+    "environmental_sensitivity": "medium",
+    "best_season": "Year-round",
+    "best_season_detail": "Jan-Mar, Jul-Sep (drier spells)",
+    "min_recommended_days": 1,
+    "budget_tier": "medium",
+    "conservation_notes": "UNESCO World Heritage ancient rock fortress; visitor numbers and climbing access are managed to protect the frescoes and structure.",
+    "description": "A UNESCO World Heritage 5th-century rock fortress with frescoes, mirror wall, and water gardens rising 200m above the plain.",
+    "imageUrl": "http://localhost:5001/images/sigiriya-lion-rock.jpg",
+    "source": "UNESCO World Heritage Centre; Dept. of Archaeology",
+    "estimated_cost_lkr": 48000
+  },
+  {
+    "name": "Polonnaruwa Ancient City",
+    "slug": "polonnaruwa-ancient-city",
+    "region": "North Central Province",
+    "coordinates": {
+      "lat": 7.9403,
+      "lng": 81.0188
+    },
+    "activity_type": "culture",
+    "secondary_activities": [],
+    "environmental_sensitivity": "medium",
+    "best_season": "Dec-Mar",
+    "best_season_detail": "Jan-Mar (dry season)",
+    "min_recommended_days": 1,
+    "budget_tier": "medium",
+    "conservation_notes": "UNESCO World Heritage medieval capital; ruins are spread over a wide area, commonly explored by bicycle.",
+    "description": "Sri Lanka's UNESCO-listed medieval capital, with ruins spread over a wide area commonly explored by bicycle.",
+    "imageUrl": "http://localhost:5001/images/polonnaruwa-ancient-city.jpg",
+    "source": "UNESCO World Heritage Centre; Dept. of Archaeology",
+    "estimated_cost_lkr": 32000
+  },
+  {
+    "name": "Anuradhapura Sacred City",
+    "slug": "anuradhapura-sacred-city",
+    "region": "North Central Province",
+    "coordinates": {
+      "lat": 8.3114,
+      "lng": 80.4037
+    },
+    "activity_type": "culture",
+    "secondary_activities": [],
+    "environmental_sensitivity": "medium",
+    "best_season": "Dec-Mar",
+    "best_season_detail": "Jan-Mar (dry season)",
+    "min_recommended_days": 2,
+    "budget_tier": "low",
+    "conservation_notes": "UNESCO World Heritage first ancient capital of Sri Lanka; includes active sacred sites, so modest dress and conduct guidelines apply.",
+    "description": "Sri Lanka's UNESCO-listed first ancient capital, home to active sacred sites and centuries-old Buddhist monuments.",
+    "imageUrl": "http://localhost:5001/images/anuradhapura-sacred-city.jpg",
+    "source": "UNESCO World Heritage Centre; Dept. of Archaeology",
+    "estimated_cost_lkr": 25000
+  },
+  {
+    "name": "Dambulla Cave Temple",
+    "slug": "dambulla-cave-temple",
+    "region": "Central Province",
+    "coordinates": {
+      "lat": 7.8567,
+      "lng": 80.6491
+    },
+    "activity_type": "culture",
+    "secondary_activities": [],
+    "environmental_sensitivity": "low",
+    "best_season": "Year-round",
+    "best_season_detail": "Year-round",
+    "min_recommended_days": 1,
+    "budget_tier": "low",
+    "conservation_notes": "UNESCO-listed cave temple complex with well-preserved murals; a lower-impact, easily-accessible cultural stop compared to open-air ruin sites.",
+    "description": "A UNESCO-listed cave temple complex with well-preserved murals, offering an easily-accessible, lower-impact cultural stop.",
+    "imageUrl": "http://localhost:5001/images/dambulla-cave-temple.jpg",
+    "source": "UNESCO World Heritage Centre",
+    "estimated_cost_lkr": 20000
+  },
+  {
+    "name": "Mirissa (Whale & Dolphin Watching)",
+    "slug": "mirissa",
+    "region": "Southern Province",
+    "coordinates": {
+      "lat": 5.9483,
+      "lng": 80.4589
+    },
+    "activity_type": "beach",
+    "secondary_activities": [
+      "wildlife"
+    ],
+    "environmental_sensitivity": "medium",
+    "best_season": "Dec-Mar",
+    "best_season_detail": "Nov-Apr (calm seas, peak Dec-Mar)",
+    "min_recommended_days": 1,
+    "budget_tier": "medium",
+    "conservation_notes": "Sri Lanka's best-known whale-watching hub; boat operators are subject to Sea Mammals Observation, Regulation and Control Regulations enforced by the Coast Guard \u2014 use licensed operators only.",
+    "description": "Sri Lanka's best-known whale and dolphin watching hub, with boat excursions departing from a lively south-coast beach town.",
+    "imageUrl": "http://localhost:5001/images/mirissa.jpg",
+    "source": "Sri Lanka Tourism Development Authority; tourism operator guides (verify current-season dates)",
+    "estimated_cost_lkr": 30000
+  },
+  {
+    "name": "Rekawa Turtle Watch",
+    "slug": "rekawa-turtle-watch",
+    "region": "Southern Province (near Tangalle)",
+    "coordinates": {
+      "lat": 6.0459,
+      "lng": 80.8481
+    },
+    "activity_type": "beach",
+    "secondary_activities": [
+      "wildlife"
+    ],
+    "environmental_sensitivity": "high",
+    "best_season": "Year-round",
+    "best_season_detail": "Year-round nesting; Nov-Apr for best weather",
+    "min_recommended_days": 1,
+    "budget_tier": "low",
+    "conservation_notes": "Community-run night turtle watching under conservation-group supervision; strict rules on lighting, flash photography and touching nesting turtles.",
+    "description": "A community-run night turtle watching site near Tangalle, operated under conservation-group supervision.",
+    "imageUrl": "http://localhost:5001/images/rekawa-turtle-watch.jpg",
+    "source": "Turtle Conservation Project; Sri Lanka Tourism Development Authority",
+    "estimated_cost_lkr": 15000
+  },
+  {
+    "name": "Kalpitiya Peninsula",
+    "slug": "kalpitiya-peninsula",
+    "region": "North Western Province",
+    "coordinates": {
+      "lat": 8.2333,
+      "lng": 79.7667
+    },
+    "activity_type": "beach",
+    "secondary_activities": [
+      "wildlife"
+    ],
+    "environmental_sensitivity": "medium",
+    "best_season": "Dec-Mar",
+    "best_season_detail": "Nov-Apr (dolphin/whale season, peak Dec-Mar)",
+    "min_recommended_days": 2,
+    "budget_tier": "high",
+    "conservation_notes": "Large resident pods of spinner dolphins and seasonal whale sightings; quieter and less commercialised than Mirissa but tours are typically more expensive.",
+    "description": "A quieter dolphin and whale watching destination with large resident spinner dolphin pods, less commercialised than Mirissa.",
+    "imageUrl": "http://localhost:5001/images/kalpitiya-peninsula.jpg",
+    "source": "Tourism operator guides (verify current-season dates)",
+    "estimated_cost_lkr": 75000
+  },
+  {
+    "name": "Pigeon Island National Park",
+    "slug": "pigeon-island-national-park",
+    "region": "Eastern Province (Trincomalee)",
+    "coordinates": {
+      "lat": 8.7211,
+      "lng": 81.1982
+    },
+    "activity_type": "beach",
+    "secondary_activities": [
+      "wildlife"
+    ],
+    "environmental_sensitivity": "high",
+    "best_season": "Apr-Sep",
+    "best_season_detail": "May-Sep (calm east-coast season)",
+    "min_recommended_days": 1,
+    "budget_tier": "medium",
+    "conservation_notes": "Marine national park with protected coral reef and reef-shark sightings; snorkelling access is regulated to limit reef damage.",
+    "description": "A marine national park off Trincomalee with protected coral reef and reef-shark sightings, popular for snorkelling.",
+    "imageUrl": "http://localhost:5001/images/pigeon-island-national-park.jpg",
+    "source": "Dept. of Wildlife Conservation",
+    "estimated_cost_lkr": 36000
+  }
+]
