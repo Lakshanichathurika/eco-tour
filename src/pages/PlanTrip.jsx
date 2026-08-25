@@ -23,6 +23,7 @@ const VEHICLE_TYPES = [
   { value: "bike", label: "Bike" },
   { value: "van", label: "Van" },
   { value: "bus", label: "Bus" },
+  { value: "train", label: "Train" },
 ];
 
 // Maps the Rs 20,000-150,000 slider onto the rule engine's low/medium/high

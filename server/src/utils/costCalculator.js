@@ -2,9 +2,13 @@
 // if/else chain, so new vehicle types or rate revisions only touch VEHICLE_RATES,
 // never the calculation logic below.
 //
-// Reference rates as of mid-2026 (Sri Lanka). Fuel prices and bus fares are
-// revised periodically by government bodies — check ceypetco.gov.lk (fuel) and
-// ntc.gov.lk (bus fares) before reusing these numbers beyond this project.
+// Reference rates as of mid-2026 (Sri Lanka). Fuel prices and public transport
+// fares are revised periodically by government bodies — check ceypetco.gov.lk
+// (fuel) and ntc.gov.lk (bus fares) before reusing these numbers beyond this
+// project.
+//
+// car/bike/van = private vehicle, fuel-based cost. bus/train = public
+// transport, ticket-fare-based cost, not fuel consumption.
 const VEHICLE_RATES = {
   car: { type: "fuel", efficiency_km_per_liter: 12, price_per_liter: 414 },
   bike: { type: "fuel", efficiency_km_per_liter: 45, price_per_liter: 414 },
@@ -14,6 +18,15 @@ const VEHICLE_RATES = {
   // rate for normal service) — not the actual stage table, which is out of
   // scope for this project.
   bus: { type: "fixed_rate", min_fare: 34, rate_per_km: 4.5 },
+  train: {
+    type: "fixed_rate",
+    min_fare: 40,
+    rate_per_km: 2.5,
+    // Approximates 3rd class base fare. Sri Lanka Railways actually prices by a
+    // stage system with 3rd class as the base column and multipliers for 2nd
+    // class (×1.8) and 1st class (×3.0) — full stage/class table is out of
+    // scope for this project, same reasoning as the bus approximation.
+  },
 };
 
 const EARTH_RADIUS_KM = 6371;
