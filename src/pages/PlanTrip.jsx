@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import DestinationCard from "../components/DestinationCard";
+import MapView from "../components/MapView";
 import { postRecommendations } from "../lib/api";
 
 const INTERESTS = ["wildlife", "hiking", "culture", "beach"];
@@ -13,8 +14,16 @@ const SEASONS = [
   { value: "Year-round", label: "Year-round" },
 ];
 
+// Maps the Rs 20,000-150,000 slider onto the rule engine's low/medium/high
+// budget tiers — an explainable boundary rule, same style as the backend rules.
+function budgetLkrToTier(value) {
+  if (value < 60000) return "low";
+  if (value <= 100000) return "medium";
+  return "high";
+}
+
 function PlanTrip() {
-  const [budget, setBudget] = useState("medium");
+  const [budgetLkr, setBudgetLkr] = useState(60000);
   const [duration, setDuration] = useState(3);
   const [interests, setInterests] = useState([]);
   const [travelSeason, setTravelSeason] = useState("no_preference");
@@ -44,7 +53,7 @@ function PlanTrip() {
     setSubmitting(true);
     try {
       const response = await postRecommendations({
-        budget,
+        budget: budgetLkrToTier(budgetLkr),
         duration: Number(duration),
         interests,
         travelSeason,
@@ -81,19 +90,26 @@ function PlanTrip() {
             className="bg-white rounded-2xl shadow-md p-8 grid gap-6 sm:grid-cols-2"
           >
             <div>
-              <label className="block font-semibold mb-2" htmlFor="budget-select">
-                Budget
+              <label className="block font-semibold mb-2" htmlFor="budget-slider">
+                Budget: Rs {budgetLkr.toLocaleString()}{" "}
+                <span className="text-gray-500 font-normal capitalize">
+                  ({budgetLkrToTier(budgetLkr)})
+                </span>
               </label>
-              <select
-                id="budget-select"
-                value={budget}
-                onChange={(e) => setBudget(e.target.value)}
-                className="w-full rounded-full border border-stone-200 bg-white px-5 py-3 text-stone-900 shadow-sm outline-none focus:border-green-700 focus:ring-2 focus:ring-green-200"
-              >
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-              </select>
+              <input
+                id="budget-slider"
+                type="range"
+                min="20000"
+                max="150000"
+                step="5000"
+                value={budgetLkr}
+                onChange={(e) => setBudgetLkr(Number(e.target.value))}
+                className="w-full accent-[#2E6B4F]"
+              />
+              <div className="flex justify-between text-xs text-gray-500 mt-1">
+                <span>Rs 20,000</span>
+                <span>Rs 150,000</span>
+              </div>
             </div>
 
             <div>
@@ -202,7 +218,23 @@ function PlanTrip() {
 
               {results.itinerary.length > 0 && (
                 <div className="mt-16">
-                  <h2 className="text-3xl font-bold mb-8">Suggested Itinerary</h2>
+                  <div className="flex items-end justify-between mb-8 flex-wrap gap-4">
+                    <h2 className="text-3xl font-bold">Suggested Itinerary</h2>
+                    <p className="text-gray-600">
+                      <span className="font-semibold text-green-700">
+                        {results.total_places}
+                      </span>{" "}
+                      places &middot; est.{" "}
+                      <span className="font-semibold text-green-700">
+                        Rs {results.total_estimated_cost_lkr.toLocaleString()}
+                      </span>
+                    </p>
+                  </div>
+
+                  <div className="mb-8">
+                    <MapView itinerary={results.itinerary} />
+                  </div>
+
                   <ol className="space-y-4">
                     {results.itinerary.map((stop, i) => (
                       <li
@@ -217,6 +249,9 @@ function PlanTrip() {
                         </p>
                         <p className="text-sm text-gray-500 mt-2">
                           {stop.notes}
+                        </p>
+                        <p className="text-sm text-green-700 font-semibold mt-2">
+                          Est. cost: Rs {stop.estimated_cost_lkr.toLocaleString()}
                         </p>
                       </li>
                     ))}
