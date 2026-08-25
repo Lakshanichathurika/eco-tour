@@ -63,12 +63,16 @@ function calculateTotalDistanceKm(itinerary) {
   return total;
 }
 
-function calculateTransportCost(distanceKm, vehicleType) {
+function calculateTransportCost(distanceKm, vehicleType, travelers = 1) {
   const rate = VEHICLE_RATES[vehicleType] || VEHICLE_RATES.car;
   if (rate.type === "fuel") {
+    // Fuel is per vehicle, not per person — one tank covers the whole group
+    // regardless of how many travelers are in the car/van/private bus.
     return (distanceKm / rate.efficiency_km_per_liter) * rate.price_per_liter;
   }
-  return Math.max(rate.min_fare, distanceKm * rate.rate_per_km);
+  // fixed_rate (public transport): each traveler buys their own ticket, so the
+  // fare scales with travelers — the OPPOSITE of the fuel case above.
+  return Math.max(rate.min_fare, distanceKm * rate.rate_per_km) * travelers;
 }
 
 module.exports = {

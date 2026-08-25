@@ -18,7 +18,8 @@
     "description": "Sri Lanka's most visited national park, renowned for having one of the highest leopard densities in the world alongside elephants and sloth bears.",
     "imageUrl": "http://localhost:5001/images/yala-national-park.jpg",
     "source": "Sri Lanka Tourism Development Authority; Dept. of Wildlife Conservation",
-    "estimated_cost_lkr": 45000,
+    "entry_fee_per_person_lkr": 18000,
+    "shared_group_cost_lkr": 27000,
     "cost_breakdown": "Entry fee (foreign visitor) ~Rs 18,000 + jeep safari hire ~Rs 22,000 (per group, shared) + guide/tracker fee ~Rs 5,000"
   },
   {
@@ -40,7 +41,8 @@
     "description": "Open grassland and scrub around the Udawalawe reservoir offering reliable elephant sightings, with an on-site elephant transit home.",
     "imageUrl": "http://localhost:5001/images/udawalawe-national-park.jpg",
     "source": "Dept. of Wildlife Conservation",
-    "estimated_cost_lkr": 18000,
+    "entry_fee_per_person_lkr": 7000,
+    "shared_group_cost_lkr": 11000,
     "cost_breakdown": "Entry fee (foreign visitor) ~Rs 7,000 + jeep safari hire ~Rs 9,000 (per group, shared) + guide/tracker fee ~Rs 2,000"
   },
   {
@@ -64,7 +66,8 @@
     "description": "A UNESCO World Heritage rainforest and the last major tract of primary tropical rainforest in Sri Lanka, home to high endemic biodiversity.",
     "imageUrl": "http://localhost:5001/images/sinharaja-forest-reserve.jpg",
     "source": "UNESCO World Heritage Centre; Forest Department",
-    "estimated_cost_lkr": 22000,
+    "entry_fee_per_person_lkr": 10000,
+    "shared_group_cost_lkr": 12000,
     "cost_breakdown": "Entry/permit fee ~Rs 8,000 + mandatory guide fee (multi-day) ~Rs 12,000 + forest dept conservation fee ~Rs 2,000"
   },
   {
@@ -88,7 +91,8 @@
     "description": "A high-altitude cloud forest and grassland plateau home to the sheer World's End escarpment and Baker's Falls.",
     "imageUrl": "http://localhost:5001/images/horton-plains-national-park.jpg",
     "source": "Dept. of Wildlife Conservation",
-    "estimated_cost_lkr": 35000,
+    "entry_fee_per_person_lkr": 28000,
+    "shared_group_cost_lkr": 7000,
     "cost_breakdown": "Entry fee (foreign visitor) ~Rs 28,000 + jeep/transport to trailhead ~Rs 5,000 + optional guide ~Rs 2,000"
   },
   {
@@ -110,7 +114,8 @@
     "description": "Sri Lanka's largest national park, known for its natural sand-rimmed lakes (villus) and a strong leopard population.",
     "imageUrl": "http://localhost:5001/images/wilpattu-national-park.jpg",
     "source": "Dept. of Wildlife Conservation",
-    "estimated_cost_lkr": 42000,
+    "entry_fee_per_person_lkr": 16000,
+    "shared_group_cost_lkr": 26000,
     "cost_breakdown": "Entry fee (foreign visitor) ~Rs 16,000 + jeep safari hire (longer routes) ~Rs 21,000 (per group, shared) + guide/tracker fee ~Rs 5,000"
   },
   {
@@ -132,7 +137,8 @@
     "description": "Home to 'The Gathering', one of Asia's largest seasonal elephant congregations around the ancient Minneriya tank.",
     "imageUrl": "http://localhost:5001/images/minneriya-national-park.jpg",
     "source": "Dept. of Wildlife Conservation; Sri Lanka Tourism Development Authority",
-    "estimated_cost_lkr": 38000,
+    "entry_fee_per_person_lkr": 14000,
+    "shared_group_cost_lkr": 24000,
     "cost_breakdown": "Entry fee (foreign visitor) ~Rs 14,000 + jeep safari hire ~Rs 19,000 (per group, shared) + guide/tracker fee ~Rs 5,000"
   },
   {
@@ -154,7 +160,8 @@
     "description": "A quieter, lower-cost elephant habitat promoted as an alternative to the busier Minneriya and Udawalawe parks.",
     "imageUrl": "http://localhost:5001/images/wasgamuwa-national-park.jpg",
     "source": "Dept. of Wildlife Conservation",
-    "estimated_cost_lkr": 16000,
+    "entry_fee_per_person_lkr": 6000,
+    "shared_group_cost_lkr": 10000,
     "cost_breakdown": "Entry fee (foreign visitor) ~Rs 6,000 + jeep safari hire ~Rs 8,000 (per group, shared) + guide/tracker fee ~Rs 2,000"
   },
   {
@@ -176,7 +183,8 @@
     "description": "Adjoining Yala, internationally recognised for migratory water birds nesting in the Kumana mangrove swamp.",
     "imageUrl": "http://localhost:5001/images/kumana-national-park.jpg",
     "source": "Dept. of Wildlife Conservation",
-    "estimated_cost_lkr": 40000,
+    "entry_fee_per_person_lkr": 15000,
+    "shared_group_cost_lkr": 25000,
     "cost_breakdown": "Entry fee (foreign visitor) ~Rs 15,000 + jeep safari hire (remote, longer transfer) ~Rs 20,000 (per group, shared) + guide/tracker fee ~Rs 5,000"
   },
   {
@@ -200,7 +208,8 @@
     "description": "A UNESCO World Heritage montane cloud forest offering multi-day trekking routes through rugged, biodiverse mountain terrain.",
     "imageUrl": "http://localhost:5001/images/knuckles-mountain-range.jpg",
     "source": "UNESCO World Heritage Centre; Forest Department",
-    "estimated_cost_lkr": 20000,
+    "entry_fee_per_person_lkr": 8000,
+    "shared_group_cost_lkr": 12000,
     "cost_breakdown": "Entry/permit fee ~Rs 6,000 + mandatory trekking guide fee (2-day) ~Rs 12,000 + forest dept fee ~Rs 2,000"
   },
   {
@@ -222,7 +231,8 @@
     "description": "An unmarked hiking trail winding through tea estates and forest to a scenic viewpoint above the hill-country town of Ella.",
     "imageUrl": "http://localhost:5001/images/ella-rock.jpg",
     "source": "Sri Lanka Tourism Development Authority",
-    "estimated_cost_lkr": 12000,
+    "entry_fee_per_person_lkr": 1000,
+    "shared_group_cost_lkr": 11000,
     "cost_breakdown": "Local guide fee (recommended, not mandatory) ~Rs 8,000 + transport/tuk to trailhead ~Rs 3,000 + incidental costs ~Rs 1,000"
   },
   {
@@ -246,7 +256,8 @@
     "description": "A sacred mountain significant to multiple faiths, climbed via a lit pilgrim staircase to a summit shrine and sunrise viewpoint.",
     "imageUrl": "http://localhost:5001/images/adams-peak-sri-pada.jpg",
     "source": "Sri Lanka Tourism Development Authority",
-    "estimated_cost_lkr": 14000,
+    "entry_fee_per_person_lkr": 4000,
+    "shared_group_cost_lkr": 10000,
     "cost_breakdown": "Transport to base (Nallathanniya) ~Rs 6,000 + optional porter/guide ~Rs 4,000 + incidental/refreshment costs ~Rs 4,000 (no formal entry ticket)"
   },
   {
@@ -268,7 +279,8 @@
     "description": "A scenic viewpoint and hiking area within the Knuckles range, known as a cooler, less-crowded alternative to the main trails.",
     "imageUrl": "http://localhost:5001/images/riverston-riverstone-peak.jpg",
     "source": "Forest Department",
-    "estimated_cost_lkr": 15000,
+    "entry_fee_per_person_lkr": 2000,
+    "shared_group_cost_lkr": 13000,
     "cost_breakdown": "Local guide fee ~Rs 8,000 + jeep/transport to trailhead ~Rs 5,000 + incidental costs ~Rs 2,000"
   },
   {
@@ -292,7 +304,8 @@
     "description": "A UNESCO World Heritage 5th-century rock fortress with frescoes, mirror wall, and water gardens rising 200m above the plain.",
     "imageUrl": "http://localhost:5001/images/sigiriya-lion-rock.jpg",
     "source": "UNESCO World Heritage Centre; Dept. of Archaeology",
-    "estimated_cost_lkr": 48000,
+    "entry_fee_per_person_lkr": 42000,
+    "shared_group_cost_lkr": 6000,
     "cost_breakdown": "Entrance ticket (foreign visitor rate) ~Rs 42,000 + optional local guide fee ~Rs 6,000"
   },
   {
@@ -314,7 +327,8 @@
     "description": "Sri Lanka's UNESCO-listed medieval capital, with ruins spread over a wide area commonly explored by bicycle.",
     "imageUrl": "http://localhost:5001/images/polonnaruwa-ancient-city.jpg",
     "source": "UNESCO World Heritage Centre; Dept. of Archaeology",
-    "estimated_cost_lkr": 32000,
+    "entry_fee_per_person_lkr": 30000,
+    "shared_group_cost_lkr": 2000,
     "cost_breakdown": "Entrance ticket (foreign visitor rate) ~Rs 27,000 + bicycle hire (site is spread out) ~Rs 3,000 + optional guide ~Rs 2,000"
   },
   {
@@ -336,7 +350,8 @@
     "description": "Sri Lanka's UNESCO-listed first ancient capital, home to active sacred sites and centuries-old Buddhist monuments.",
     "imageUrl": "http://localhost:5001/images/anuradhapura-sacred-city.jpg",
     "source": "UNESCO World Heritage Centre; Dept. of Archaeology",
-    "estimated_cost_lkr": 25000,
+    "entry_fee_per_person_lkr": 23000,
+    "shared_group_cost_lkr": 2000,
     "cost_breakdown": "Entrance ticket (foreign visitor, round ticket) ~Rs 20,000 + local transport/bicycle hire between sites ~Rs 3,000 + optional guide ~Rs 2,000"
   },
   {
@@ -358,7 +373,8 @@
     "description": "A UNESCO-listed cave temple complex with well-preserved murals, offering an easily-accessible, lower-impact cultural stop.",
     "imageUrl": "http://localhost:5001/images/dambulla-cave-temple.jpg",
     "source": "UNESCO World Heritage Centre",
-    "estimated_cost_lkr": 20000,
+    "entry_fee_per_person_lkr": 17000,
+    "shared_group_cost_lkr": 3000,
     "cost_breakdown": "Entrance ticket (foreign visitor rate) ~Rs 17,000 + optional local guide fee ~Rs 3,000"
   },
   {
@@ -382,7 +398,8 @@
     "description": "Sri Lanka's best-known whale and dolphin watching hub, with boat excursions departing from a lively south-coast beach town.",
     "imageUrl": "http://localhost:5001/images/mirissa.jpg",
     "source": "Sri Lanka Tourism Development Authority; tourism operator guides (verify current-season dates)",
-    "estimated_cost_lkr": 30000,
+    "entry_fee_per_person_lkr": 27000,
+    "shared_group_cost_lkr": 3000,
     "cost_breakdown": "Boat tour fee, licensed operator ~Rs 27,000 + optional hotel pickup/transport ~Rs 3,000"
   },
   {
@@ -406,7 +423,8 @@
     "description": "A community-run night turtle watching site near Tangalle, operated under conservation-group supervision.",
     "imageUrl": "http://localhost:5001/images/rekawa-turtle-watch.jpg",
     "source": "Turtle Conservation Project; Sri Lanka Tourism Development Authority",
-    "estimated_cost_lkr": 15000,
+    "entry_fee_per_person_lkr": 10000,
+    "shared_group_cost_lkr": 5000,
     "cost_breakdown": "Community-run turtle watch fee/donation ~Rs 10,000 + community guide fee ~Rs 3,000 + transport to site ~Rs 2,000"
   },
   {
@@ -430,7 +448,8 @@
     "description": "A quieter dolphin and whale watching destination with large resident spinner dolphin pods, less commercialised than Mirissa.",
     "imageUrl": "http://localhost:5001/images/kalpitiya-peninsula.jpg",
     "source": "Tourism operator guides (verify current-season dates)",
-    "estimated_cost_lkr": 75000,
+    "entry_fee_per_person_lkr": 65000,
+    "shared_group_cost_lkr": 10000,
     "cost_breakdown": "Dolphin/whale watching boat tour, smaller group ~Rs 65,000 + hotel pickup/transport ~Rs 10,000"
   },
   {
@@ -454,7 +473,8 @@
     "description": "A marine national park off Trincomalee with protected coral reef and reef-shark sightings, popular for snorkelling.",
     "imageUrl": "http://localhost:5001/images/pigeon-island-national-park.jpg",
     "source": "Dept. of Wildlife Conservation",
-    "estimated_cost_lkr": 36000,
+    "entry_fee_per_person_lkr": 17000,
+    "shared_group_cost_lkr": 19000,
     "cost_breakdown": "Marine park entry fee ~Rs 10,000 + boat transfer to island ~Rs 14,000 + snorkelling gear hire ~Rs 7,000 + guide/lifeguard fee ~Rs 5,000"
   }
 ]

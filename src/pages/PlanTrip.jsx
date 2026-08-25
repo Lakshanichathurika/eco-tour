@@ -50,6 +50,7 @@ function budgetLkrToTier(value) {
 function PlanTrip() {
   const [budgetLkr, setBudgetLkr] = useState(60000);
   const [duration, setDuration] = useState(3);
+  const [travelers, setTravelers] = useState(2);
   const [vehicleType, setVehicleType] = useState("car");
   const [interests, setInterests] = useState([]);
   const [travelSeason, setTravelSeason] = useState("no_preference");
@@ -60,6 +61,9 @@ function PlanTrip() {
   const [directionsLegs, setDirectionsLegs] = useState([]);
   const [expandedStopId, setExpandedStopId] = useState(null);
   const weatherByDestinationId = useWeatherForItinerary(results?.itinerary);
+  const isPublicTransportVehicle = VEHICLE_TYPE_GROUPS.find(
+    (g) => g.group === "Public Transport"
+  ).options.some((v) => v.value === vehicleType);
 
   const toggleInterest = (value) => {
     setInterests((prev) =>
@@ -88,6 +92,7 @@ function PlanTrip() {
         interests,
         travelSeason,
         vehicle_type: vehicleType,
+        travelers: Number(travelers),
       });
       if (!response.success) {
         setError(response.message || "Something went wrong.");
@@ -155,6 +160,21 @@ function PlanTrip() {
                 max="30"
                 value={duration}
                 onChange={(e) => setDuration(e.target.value)}
+                className="w-full rounded-full border border-stone-200 bg-white px-5 py-3 text-stone-900 shadow-sm outline-none focus:border-green-700 focus:ring-2 focus:ring-green-200"
+              />
+            </div>
+
+            <div>
+              <label className="block font-semibold mb-2" htmlFor="travelers-input">
+                Number of travelers
+              </label>
+              <input
+                id="travelers-input"
+                type="number"
+                min="1"
+                step="1"
+                value={travelers}
+                onChange={(e) => setTravelers(e.target.value)}
                 className="w-full rounded-full border border-stone-200 bg-white px-5 py-3 text-stone-900 shadow-sm outline-none focus:border-green-700 focus:ring-2 focus:ring-green-200"
               />
             </div>
@@ -291,7 +311,23 @@ function PlanTrip() {
                           Rs {Math.round(results.estimated_transport_cost_lkr).toLocaleString()}
                         </span>{" "}
                         <span className="text-xs text-gray-400">
-                          ({results.total_distance_km.toFixed(1)} km, straight-line estimate)
+                          {isPublicTransportVehicle
+                            ? `(${travelers} traveler${
+                                Number(travelers) === 1 ? "" : "s"
+                              } · ${results.total_distance_km.toFixed(1)} km straight-line estimate)`
+                            : `(${results.total_distance_km.toFixed(
+                                1
+                              )} km · per vehicle, straight-line estimate)`}
+                        </span>
+                      </p>
+                      <p className="mt-1 font-semibold">
+                        Total: est.{" "}
+                        <span className="text-green-700">
+                          Rs{" "}
+                          {(
+                            results.total_estimated_cost_lkr +
+                            results.estimated_transport_cost_lkr
+                          ).toLocaleString(undefined, { maximumFractionDigits: 0 })}
                         </span>
                       </p>
                     </div>
@@ -341,7 +377,10 @@ function PlanTrip() {
                             }
                             className="flex items-center gap-1 text-sm text-green-700 font-semibold mt-2"
                           >
-                            Est. cost: Rs {stop.estimated_cost_lkr.toLocaleString()}
+                            Rs {stop.destination_total_cost_lkr.toLocaleString()} (Rs{" "}
+                            {stop.entry_fee_per_person_lkr.toLocaleString()} x {travelers}{" "}
+                            traveler{Number(travelers) === 1 ? "" : "s"} + Rs{" "}
+                            {stop.shared_group_cost_lkr.toLocaleString()} shared)
                             <ChevronDown
                               size={16}
                               className={`transition-transform ${
@@ -351,7 +390,10 @@ function PlanTrip() {
                           </button>
                         ) : (
                           <p className="text-sm text-green-700 font-semibold mt-2">
-                            Est. cost: Rs {stop.estimated_cost_lkr.toLocaleString()}
+                            Rs {stop.destination_total_cost_lkr.toLocaleString()} (Rs{" "}
+                            {stop.entry_fee_per_person_lkr.toLocaleString()} x {travelers}{" "}
+                            traveler{Number(travelers) === 1 ? "" : "s"} + Rs{" "}
+                            {stop.shared_group_cost_lkr.toLocaleString()} shared)
                           </p>
                         )}
                         {expandedStopId === stop.destination_id && stop.cost_breakdown && (

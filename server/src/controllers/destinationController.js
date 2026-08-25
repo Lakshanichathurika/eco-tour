@@ -27,7 +27,9 @@ function toDestinationDTO(doc) {
     budget_tier: doc.budget_tier,
     conservation_notes: doc.conservation_notes,
     source: doc.source,
-    estimated_cost_lkr: doc.estimated_cost_lkr,
+    entry_fee_per_person_lkr: doc.entry_fee_per_person_lkr,
+    shared_group_cost_lkr: doc.shared_group_cost_lkr,
+    estimated_cost_lkr: doc.estimated_cost_lkr, // virtual: entry+shared, 1-traveler reference
     cost_breakdown: doc.cost_breakdown,
   };
 }

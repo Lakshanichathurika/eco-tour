@@ -11,8 +11,15 @@ async function postRecommendations(req, res, next) {
       return res.status(400).json({ success: false, message: "Invalid request", errors });
     }
 
-    const { budget, duration, interests, travelSeason = "no_preference", vehicle_type = "car" } = req.body;
-    const userInput = { budget, duration, interests, travelSeason, vehicle_type };
+    const {
+      budget,
+      duration,
+      interests,
+      travelSeason = "no_preference",
+      vehicle_type = "car",
+      travelers = 1,
+    } = req.body;
+    const userInput = { budget, duration, interests, travelSeason, vehicle_type, travelers };
 
     const allDestinations = await Destination.find();
     const dtos = allDestinations.map(toDestinationDTO);
@@ -20,9 +27,20 @@ async function postRecommendations(req, res, next) {
     const recommendations = rankDestinations(dtos, userInput);
     const itinerary = buildItinerary(recommendations, duration);
 
-    const total_places = itinerary.length;
-    const total_estimated_cost_lkr = itinerary.reduce(
-      (sum, stop) => sum + stop.estimated_cost_lkr,
+    // Per-stop travelers-aware cost, computed here rather than inside
+    // buildItinerary() — that function's rules are individually unit-tested for
+    // the dissertation, so its signature/logic stays untouched; buildItinerary()
+    // only contributes the raw entry_fee_per_person_lkr/shared_group_cost_lkr
+    // fields per stop, and this is where they're combined with travelers.
+    const itineraryWithCosts = itinerary.map((stop) => ({
+      ...stop,
+      destination_total_cost_lkr:
+        stop.entry_fee_per_person_lkr * travelers + stop.shared_group_cost_lkr,
+    }));
+
+    const total_places = itineraryWithCosts.length;
+    const total_estimated_cost_lkr = itineraryWithCosts.reduce(
+      (sum, stop) => sum + stop.destination_total_cost_lkr,
       0
     );
 
@@ -30,14 +48,18 @@ async function postRecommendations(req, res, next) {
     // sequencing to draw on, and real road distance is only available client-side
     // via the Directions API after the map loads. Kept separate from
     // total_estimated_cost_lkr (destination entry/activity costs), not merged.
-    const total_distance_km = calculateTotalDistanceKm(itinerary);
-    const estimated_transport_cost_lkr = calculateTransportCost(total_distance_km, vehicle_type);
+    const total_distance_km = calculateTotalDistanceKm(itineraryWithCosts);
+    const estimated_transport_cost_lkr = calculateTransportCost(
+      total_distance_km,
+      vehicle_type,
+      travelers
+    );
 
     res.json({
       success: true,
       input: userInput,
       recommendations,
-      itinerary,
+      itinerary: itineraryWithCosts,
       total_places,
       total_estimated_cost_lkr,
       total_distance_km,

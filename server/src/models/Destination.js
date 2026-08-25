@@ -25,11 +25,23 @@ const destinationSchema = new mongoose.Schema(
     description: { type: String, required: true },
     imageUrl: { type: String, required: true },
     source: { type: String, default: "" },
-    estimated_cost_lkr: { type: Number, required: true, min: 0 },
+    // entry_fee_per_person_lkr scales with each traveler (park/site ticket).
+    // shared_group_cost_lkr is paid once per group regardless of group size
+    // (jeep/boat charter, guide fee).
+    entry_fee_per_person_lkr: { type: Number, required: true, min: 0 },
+    shared_group_cost_lkr: { type: Number, required: true, min: 0 },
     cost_breakdown: { type: String, default: "" },
   },
   { timestamps: true }
 );
+
+// Backward-compat reference only (the "1 traveler" total) — not stored, not used
+// by any real calculation. Real cost math uses the two fields above directly.
+destinationSchema.virtual("estimated_cost_lkr").get(function () {
+  return this.entry_fee_per_person_lkr + this.shared_group_cost_lkr;
+});
+destinationSchema.set("toJSON", { virtuals: true });
+destinationSchema.set("toObject", { virtuals: true });
 
 module.exports = mongoose.model("Destination", destinationSchema);
 module.exports.ACTIVITY_TYPES = ACTIVITY_TYPES;
