@@ -1,0 +1,24 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <!-- Background: rounded square, EcoRoute teal -->
+  <rect x="0" y="0" width="512" height="512" rx="112" fill="#0F6E56"/>
+
+  <!-- Leaf shape: two mirrored half-paths for a clean two-tone split -->
+  <g transform="translate(256,246) rotate(-38)">
+    <path d="M 0,-150 C -62,-150 -96,-96 -96,-22 C -96,64 -54,132 0,152 Z"
+          fill="#B7ECD9"/>
+    <path d="M 0,-150 C 62,-150 96,-96 96,-22 C 96,64 54,132 0,152 Z"
+          fill="#4AC297"/>
+    <!-- central vein -->
+    <line x1="0" y1="-142" x2="0" y2="148" stroke="#0F6E56" stroke-width="9" stroke-linecap="round"/>
+    <!-- side veins (symmetric pairs) -->
+    <line x1="0" y1="-70" x2="52" y2="-28" stroke="#0F6E56" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+    <line x1="0" y1="-70" x2="-52" y2="-28" stroke="#0F6E56" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+    <line x1="0" y1="10" x2="58" y2="52" stroke="#0F6E56" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+    <line x1="0" y1="10" x2="-58" y2="52" stroke="#0F6E56" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+    <line x1="0" y1="88" x2="38" y2="116" stroke="#0F6E56" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+    <line x1="0" y1="88" x2="-38" y2="116" stroke="#0F6E56" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+  </g>
+
+  <!-- Route pin dot at the base, tying leaf-to-map-pin theme -->
+  <circle cx="256" cy="392" r="16" fill="#E1F5EE"/>
+</svg>
