@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import DestinationCard from "../components/DestinationCard";
@@ -13,13 +15,6 @@ import { postRecommendations, saveTrip } from "../lib/api";
 import { getClientId } from "../utils/clientId";
 
 const INTERESTS = ["wildlife", "hiking", "culture", "beach"];
-const SEASONS = [
-  { value: "no_preference", label: "No preference" },
-  { value: "Dec-Mar", label: "Dec - Mar" },
-  { value: "Apr-Sep", label: "Apr - Sep" },
-  { value: "Oct-Nov", label: "Oct - Nov" },
-  { value: "Year-round", label: "Year-round" },
-];
 const VEHICLE_TYPE_GROUPS = [
   {
     group: "Private Vehicle",
@@ -54,7 +49,8 @@ function PlanTrip() {
   const [travelers, setTravelers] = useState(2);
   const [vehicleType, setVehicleType] = useState("car");
   const [interests, setInterests] = useState([]);
-  const [travelSeason, setTravelSeason] = useState("no_preference");
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
   const [results, setResults] = useState(null);
@@ -65,6 +61,15 @@ function PlanTrip() {
   const isPublicTransportVehicle = VEHICLE_TYPE_GROUPS.find(
     (g) => g.group === "Public Transport"
   ).options.some((v) => v.value === vehicleType);
+
+  // Derive trip length from the selected date range — the duration field becomes
+  // read-only once both dates are picked (see the input below).
+  useEffect(() => {
+    if (startDate && endDate) {
+      const days = Math.round((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
+      setDuration(days);
+    }
+  }, [startDate, endDate]);
 
   const toggleInterest = (value) => {
     setInterests((prev) =>
@@ -91,7 +96,8 @@ function PlanTrip() {
         budget: budgetLkrToTier(budgetLkr),
         duration: Number(duration),
         interests,
-        travelSeason,
+        travelStartDate: startDate ? startDate.toISOString().slice(0, 10) : undefined,
+        travelEndDate: endDate ? endDate.toISOString().slice(0, 10) : undefined,
         vehicle_type: vehicleType,
         travelers: Number(travelers),
       };
@@ -175,8 +181,11 @@ function PlanTrip() {
                 min="1"
                 max="30"
                 value={duration}
+                readOnly={!!(startDate && endDate)}
                 onChange={(e) => setDuration(e.target.value)}
-                className="w-full rounded-full border border-stone-200 bg-white px-5 py-3 text-stone-900 shadow-sm outline-none focus:border-green-700 focus:ring-2 focus:ring-green-200"
+                className={`w-full rounded-full border border-stone-200 px-5 py-3 text-stone-900 shadow-sm outline-none focus:border-green-700 focus:ring-2 focus:ring-green-200 ${
+                  startDate && endDate ? "bg-stone-100" : "bg-white"
+                }`}
               />
             </div>
 
@@ -218,21 +227,23 @@ function PlanTrip() {
             </div>
 
             <div>
-              <label className="block font-semibold mb-2" htmlFor="season-select">
-                Travel season
+              <label className="block font-semibold mb-2" htmlFor="travel-dates-input">
+                Travel dates
               </label>
-              <select
-                id="season-select"
-                value={travelSeason}
-                onChange={(e) => setTravelSeason(e.target.value)}
+              <DatePicker
+                id="travel-dates-input"
+                selectsRange
+                startDate={startDate}
+                endDate={endDate}
+                onChange={([s, e]) => {
+                  setStartDate(s);
+                  setEndDate(e);
+                }}
+                minDate={new Date()}
+                placeholderText="Select start and end date"
                 className="w-full rounded-full border border-stone-200 bg-white px-5 py-3 text-stone-900 shadow-sm outline-none focus:border-green-700 focus:ring-2 focus:ring-green-200"
-              >
-                {SEASONS.map((s) => (
-                  <option key={s.value} value={s.value}>
-                    {s.label}
-                  </option>
-                ))}
-              </select>
+                wrapperClassName="w-full"
+              />
             </div>
 
             <div>

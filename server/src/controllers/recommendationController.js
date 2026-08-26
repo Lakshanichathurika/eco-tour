@@ -1,7 +1,7 @@
 const Destination = require("../models/Destination");
 const { toDestinationDTO } = require("./destinationController");
 const validateRecommendationInput = require("../utils/validateRecommendationInput");
-const { rankDestinations, buildItinerary } = require("../services/recommendationEngine");
+const { rankDestinations, buildItinerary, getMonthsInRange } = require("../services/recommendationEngine");
 const { calculateTotalDistanceKm, calculateTransportCost } = require("../utils/costCalculator");
 
 async function postRecommendations(req, res, next) {
@@ -13,13 +13,41 @@ async function postRecommendations(req, res, next) {
 
     const {
       budget,
-      duration,
+      duration: requestedDuration,
       interests,
-      travelSeason = "no_preference",
+      travelStartDate,
+      travelEndDate,
       vehicle_type = "car",
       travelers = 1,
     } = req.body;
-    const userInput = { budget, duration, interests, travelSeason, vehicle_type, travelers };
+
+    // If a date range is given, duration is derived from it (days inclusive) and
+    // season scoring uses every month the range spans. Otherwise, fall back to
+    // the explicit duration and score against today's single-day "month" — the
+    // date picker replaced the old "no preference" dropdown option, so every
+    // request now gets some season scoring rather than skipping it.
+    let duration = requestedDuration;
+    let monthsInRange;
+    if (travelStartDate && travelEndDate) {
+      const start = new Date(travelStartDate);
+      const end = new Date(travelEndDate);
+      duration = Math.round((end - start) / (1000 * 60 * 60 * 24)) + 1;
+      monthsInRange = getMonthsInRange(start, end);
+    } else {
+      const today = new Date();
+      monthsInRange = getMonthsInRange(today, today);
+    }
+
+    const userInput = { budget, duration, interests, monthsInRange, vehicle_type, travelers };
+    const echoedInput = {
+      budget,
+      duration,
+      interests,
+      travelStartDate: travelStartDate || null,
+      travelEndDate: travelEndDate || null,
+      vehicle_type,
+      travelers,
+    };
 
     const allDestinations = await Destination.find();
     const dtos = allDestinations.map(toDestinationDTO);
@@ -57,7 +85,7 @@ async function postRecommendations(req, res, next) {
 
     res.json({
       success: true,
-      input: userInput,
+      input: echoedInput,
       recommendations,
       itinerary: itineraryWithCosts,
       total_places,

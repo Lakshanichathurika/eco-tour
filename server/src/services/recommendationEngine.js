@@ -99,6 +99,64 @@ function ruleSeason(destination, travelSeason) {
   };
 }
 
+const MONTH_ABBREV = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+];
+
+// Maps each destination best_season band (from Destination.js's real enum) to
+// its constituent months. Used by ruleSeasonRange below; ruleSeason (the old,
+// single-band-string rule) does not use this and is left untouched.
+const SEASON_BAND_MONTHS = {
+  "Dec-Mar": ["Dec", "Jan", "Feb", "Mar"],
+  "Apr-Sep": ["Apr", "May", "Jun", "Jul", "Aug", "Sep"],
+  "Oct-Nov": ["Oct", "Nov"],
+  "Year-round": MONTH_ABBREV,
+};
+
+function parseSeasonMonths(bestSeason) {
+  return new Set(SEASON_BAND_MONTHS[bestSeason] || []);
+}
+
+// Set of month abbreviations spanned by a date range, inclusive of both months,
+// handling ranges that cross a year boundary (e.g. Dec 20 -> Jan 5 yields
+// {Dec, Jan}) via native Date month rollover. Capped at 12 steps regardless of
+// input so a malformed/huge range can't loop indefinitely.
+function getMonthsInRange(startDate, endDate) {
+  const months = new Set();
+  const cursor = new Date(startDate.getFullYear(), startDate.getMonth(), 1);
+  const endMonth = new Date(endDate.getFullYear(), endDate.getMonth(), 1);
+  for (let i = 0; i < 12 && cursor <= endMonth; i++) {
+    months.add(MONTH_ABBREV[cursor.getMonth()]);
+    cursor.setMonth(cursor.getMonth() + 1);
+  }
+  return months;
+}
+
+// R5 (range-aware) — replaces ruleSeason in the live scoring pipeline: overlap
+// between the traveler's selected date range and a destination's best_season
+// window, rather than a single travelSeason band matching exactly. Same point
+// scale as the original ruleSeason.
+function ruleSeasonRange(destination, monthsInRange) {
+  if (!monthsInRange || monthsInRange.size === 0) {
+    return { points: 0, reason: null, mismatched: false };
+  }
+  const destMonths = parseSeasonMonths(destination.best_season);
+  const overlaps = [...monthsInRange].some((m) => destMonths.has(m));
+  if (overlaps) {
+    return {
+      points: 15,
+      reason: `Your selected travel dates overlap this destination's best season (${destination.best_season}).`,
+      mismatched: false,
+    };
+  }
+  return {
+    points: -10,
+    reason: `Your selected travel dates fall outside this destination's recommended ${destination.best_season} window — expect less favorable conditions.`,
+    mismatched: true,
+  };
+}
+
 // R6 — coastal monsoon safety rule (beach-specific, stacks on R5 mismatch).
 function ruleCoastalSafety(destination, seasonResult) {
   if (destination.activity_type === "beach" && seasonResult.mismatched) {
@@ -138,9 +196,9 @@ function ruleShortTripCulture(destination, duration) {
 
 // Applies R1b-R8 to a single destination, returns raw score + reasons.
 function scoreDestination(destination, userInput) {
-  const { budget, duration, interests, travelSeason } = userInput;
+  const { budget, duration, interests, monthsInRange } = userInput;
 
-  const seasonResult = ruleSeason(destination, travelSeason);
+  const seasonResult = ruleSeasonRange(destination, monthsInRange);
   const parts = [
     rulePrimaryInterest(destination, interests),
     ruleSecondaryInterest(destination, interests),
@@ -238,6 +296,9 @@ module.exports = {
   ruleBudget,
   ruleDuration,
   ruleSeason,
+  ruleSeasonRange,
+  parseSeasonMonths,
+  getMonthsInRange,
   ruleCoastalSafety,
   ruleSensitivity,
   ruleShortTripCulture,
