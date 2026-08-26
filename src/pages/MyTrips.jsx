@@ -5,29 +5,66 @@ import Footer from "../components/Footer";
 import { MdDelete } from "react-icons/md";
 import { getTrips, deleteTrip } from "../lib/api";
 import { getClientId } from "../utils/clientId";
+import ellaImg from "../assets/ella.jpg";
+import sigiriyaImg from "../assets/sigiriya.jpg";
+import sinharajaImg from "../assets/sinharaja.jpg";
+import yalaImg from "../assets/yala.jpg";
 
 // No per-trip photo exists yet (itinerary stops don't carry an image field),
 // so real trips cycle through the same placeholder set the old hardcoded
-// version used, by index.
-const PLACEHOLDER_IMAGES = [
-  "src/assets/ella.jpg",
-  "src/assets/sigiriya.jpg",
-  "src/assets/sinharaja.jpg",
-  "src/assets/yala.jpg",
-];
+// version used, by index. Imported as modules (not raw path strings) so Vite
+// actually resolves them — a bare "src/assets/x.jpg" string used directly in
+// a background-image url() 404s, since it resolves against the page URL, not
+// the project root.
+const PLACEHOLDER_IMAGES = [ellaImg, sigiriyaImg, sinharajaImg, yalaImg];
 
 const MONTH_ABBREV = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
 ];
 
+function formatDateRange(startStr, endStr) {
+  const start = new Date(startStr);
+  const end = new Date(endStr);
+  const startLabel = `${MONTH_ABBREV[start.getMonth()]} ${start.getDate()}`;
+  const endLabel = `${MONTH_ABBREV[end.getMonth()]} ${end.getDate()}, ${end.getFullYear()}`;
+  return `${startLabel} - ${endLabel}`;
+}
+
 function toCard(trip, index) {
-  const createdAt = new Date(trip.created_at);
-  const duration = trip.preferences?.duration;
+  const prefs = trip.preferences || {};
+  const itinerary = Array.isArray(trip.itinerary) ? trip.itinerary : [];
+
+  const primaryInterest = prefs.interests?.[0];
+  const title = primaryInterest
+    ? `${itinerary.length} places · ${
+        primaryInterest.charAt(0).toUpperCase() + primaryInterest.slice(1)
+      } trip`
+    : `${itinerary.length} places`;
+
+  const dateLabel =
+    prefs.travelStartDate && prefs.travelEndDate
+      ? formatDateRange(prefs.travelStartDate, prefs.travelEndDate)
+      : prefs.duration
+      ? `${prefs.duration} days`
+      : null;
+
+  const travelersLabel = prefs.travelers
+    ? `${prefs.travelers} traveler${prefs.travelers === 1 ? "" : "s"}`
+    : null;
+
+  const destinationNames = itinerary.map((stop) => stop.title).filter(Boolean);
+  const destinationsLabel =
+    destinationNames.length > 3
+      ? `${destinationNames.slice(0, 3).join(", ")} and ${destinationNames.length - 3} more`
+      : destinationNames.join(", ");
+
   return {
     id: trip._id,
-    title: `${duration}-Day Eco Journey - ${MONTH_ABBREV[createdAt.getMonth()]}`,
-    days: `${duration} days`,
+    title,
+    dateLabel,
+    travelersLabel,
+    destinationsLabel,
     price: `LKR ${Math.round(
       (trip.total_estimated_cost_lkr || 0) + (trip.estimated_transport_cost_lkr || 0)
     ).toLocaleString()}`,
@@ -96,7 +133,8 @@ function MyTrips() {
               {trips.map((trip) => (
                 <article
                   key={trip.id}
-                  className="rounded-[26px] overflow-hidden border border-[#e6e2db] bg-[#f8f8f8] shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+                  onClick={() => navigate(`/mytrips/${trip.id}`)}
+                  className="cursor-pointer rounded-[26px] overflow-hidden border border-[#e6e2db] bg-[#f8f8f8] shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
                 >
                   <div
                     className="h-64 w-full bg-cover bg-center"
@@ -113,8 +151,18 @@ function MyTrips() {
                       </span>
                     </div>
 
+                    {trip.dateLabel && (
+                      <p className="mt-2 text-sm text-[#4a4d48]">{trip.dateLabel}</p>
+                    )}
+
+                    {trip.destinationsLabel && (
+                      <p className="mt-1 text-sm text-[#4a4d48] truncate">
+                        {trip.destinationsLabel}
+                      </p>
+                    )}
+
                     <div className="mt-4 flex items-center justify-between text-sm text-[#4a4d48]">
-                      <span>{trip.days}</span>
+                      {trip.travelersLabel && <span>{trip.travelersLabel}</span>}
                       <span>{trip.price}</span>
                       <span>{trip.distance}</span>
                     </div>
@@ -123,7 +171,10 @@ function MyTrips() {
                       <button
                         type="button"
                         aria-label="Delete trip"
-                        onClick={() => handleDelete(trip.id)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDelete(trip.id);
+                        }}
                         className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#f5f5f5] border border-[#d9d9d9] text-[#1f2d2a] hover:bg-[#e9ece7] transition"
                       >
                         <MdDelete className="h-4 w-4" />

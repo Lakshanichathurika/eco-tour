@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Destination from "./pages/Destination";
 import PlanTrip from "./pages/PlanTrip";
 import MyTrips from "./pages/MyTrips";
+import TripDetail from "./pages/TripDetail";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -22,6 +23,7 @@ function App() {
         <Route path="/plantrip" element={<PlanTrip />} />
 
         <Route path="/mytrips" element={<MyTrips />} />
+        <Route path="/mytrips/:tripId" element={<TripDetail />} />
 
         <Route path="/dashboard" element={<Dashboard />} />
 

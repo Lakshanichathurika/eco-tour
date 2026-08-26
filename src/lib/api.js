@@ -56,6 +56,14 @@ export async function getTrips(clientId) {
   return json.data;
 }
 
+export async function getTripById(id, clientId) {
+  const res = await fetch(`${API_BASE}/trips/${id}?client_id=${encodeURIComponent(clientId)}`);
+  if (res.status === 404) return null;
+  const json = await res.json();
+  if (!json.success) throw new Error(json.message || "Failed to fetch trip");
+  return json.data;
+}
+
 export async function deleteTrip(id) {
   const res = await fetch(`${API_BASE}/trips/${id}`, { method: "DELETE" });
   const json = await res.json();
