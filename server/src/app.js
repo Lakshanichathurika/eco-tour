@@ -11,6 +11,11 @@ const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
 
+// Render (and similar hosts) sit behind a reverse proxy — without this,
+// req.protocol always reports "http" even for real https:// requests, which
+// would leak into any URL built from it (e.g. destination image URLs).
+app.set("trust proxy", true);
+
 app.use(cors({ origin: process.env.CORS_ORIGIN || "http://localhost:5173" }));
 app.use(express.json());
 

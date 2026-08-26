@@ -1,5 +1,5 @@
 const Destination = require("../models/Destination");
-const { toDestinationDTO } = require("./destinationController");
+const { toDestinationDTO, getBackendBaseUrl } = require("./destinationController");
 const validateRecommendationInput = require("../utils/validateRecommendationInput");
 const { rankDestinations, buildItinerary, getMonthsInRange } = require("../services/recommendationEngine");
 const { calculateTotalDistanceKm, calculateTransportCost } = require("../utils/costCalculator");
@@ -49,8 +49,9 @@ async function postRecommendations(req, res, next) {
       travelers,
     };
 
+    const baseUrl = getBackendBaseUrl(req);
     const allDestinations = await Destination.find();
-    const dtos = allDestinations.map(toDestinationDTO);
+    const dtos = allDestinations.map((d) => toDestinationDTO(d, baseUrl));
 
     const recommendations = rankDestinations(dtos, userInput);
     const itinerary = buildItinerary(recommendations, duration);
