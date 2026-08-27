@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { MdDelete } from "react-icons/md";
 import { FaTimes } from "react-icons/fa";
+import { AuthProvider } from "./context/AuthContext";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Destination from "./pages/Destination";
@@ -13,26 +14,28 @@ import Signup from "./pages/Signup";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
 
-        <Route path="/destination" element={<Destination />} />
-        <Route path="/destination/:id" element={<Destination />} />
+          <Route path="/destination" element={<Destination />} />
+          <Route path="/destination/:id" element={<Destination />} />
 
-        <Route path="/plantrip" element={<PlanTrip />} />
+          <Route path="/plantrip" element={<PlanTrip />} />
 
-        <Route path="/mytrips" element={<MyTrips />} />
-        <Route path="/mytrips/:tripId" element={<TripDetail />} />
+          <Route path="/mytrips" element={<MyTrips />} />
+          <Route path="/mytrips/:tripId" element={<TripDetail />} />
 
-        <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />} />
 
-        <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login />} />
 
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/viewall" element={<Destination />} />
-      </Routes>
-    </BrowserRouter>
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/viewall" element={<Destination />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

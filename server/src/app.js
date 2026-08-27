@@ -6,6 +6,7 @@ const recommendationRoutes = require("./routes/recommendationRoutes");
 const weatherRoutes = require("./routes/weatherRoutes");
 const placesRoutes = require("./routes/placesRoutes");
 const tripRoutes = require("./routes/tripRoutes");
+const authRoutes = require("./routes/authRoutes");
 const notFound = require("./middleware/notFound");
 const errorHandler = require("./middleware/errorHandler");
 
@@ -30,6 +31,7 @@ app.use("/api/recommendations", recommendationRoutes);
 app.use("/api/weather", weatherRoutes);
 app.use("/api/places", placesRoutes);
 app.use("/api/trips", tripRoutes);
+app.use("/api/auth", authRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
