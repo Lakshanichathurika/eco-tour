@@ -12,6 +12,11 @@ function errorHandler(err, req, res, next) {
     const field = Object.keys(err.keyPattern || {})[0] || "value";
     return res.status(409).json({ success: false, message: `This ${field} is already in use` });
   }
+  // body-parser's request-too-large error — surfaced as a clean 400 instead
+  // of falling through to a generic 500.
+  if (err.type === "entity.too.large") {
+    return res.status(400).json({ success: false, message: "Request body is too large" });
+  }
   console.error(err);
   res.status(500).json({ success: false, message: "Internal server error" });
 }

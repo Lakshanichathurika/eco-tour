@@ -20,7 +20,9 @@ const app = express();
 app.set("trust proxy", true);
 
 app.use(cors({ origin: process.env.CORS_ORIGIN || "http://localhost:5173" }));
-app.use(express.json());
+// Default 100kb is too small for a base64-encoded profile picture (up to
+// ~1.4MB of JSON) — raised with headroom above that cap.
+app.use(express.json({ limit: "2mb" }));
 
 // Destination images are downloaded once into public/images at seed time
 // and served locally rather than hotlinked, since hotlinking upload.wikimedia.org

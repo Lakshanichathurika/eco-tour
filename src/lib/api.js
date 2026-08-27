@@ -148,3 +148,34 @@ export async function unsaveDestination(destId, token) {
   if (!json.success) throw new Error(json.message || "Failed to remove destination");
   return json;
 }
+
+export async function getProfile(token) {
+  const res = await fetch(`${API_BASE}/users/profile`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  const json = await res.json();
+  if (!json.success) throw new Error(json.message || "Failed to fetch profile");
+  return json.data;
+}
+
+export async function updateProfile(payload, token) {
+  const res = await fetch(`${API_BASE}/users/profile`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+    body: JSON.stringify(payload),
+  });
+  const json = await res.json();
+  if (!json.success) throw new Error(json.errors?.[0] || json.message || "Failed to update profile");
+  return json.data;
+}
+
+export async function changePassword(payload, token) {
+  const res = await fetch(`${API_BASE}/users/change-password`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+    body: JSON.stringify(payload),
+  });
+  const json = await res.json();
+  if (!json.success) throw new Error(json.errors?.[0] || json.message || "Failed to change password");
+  return json;
+}

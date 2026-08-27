@@ -12,6 +12,9 @@ function toPublicUser(doc) {
     id: doc._id.toString(),
     name: doc.name,
     email: doc.email,
+    phone: doc.phone,
+    bio: doc.bio,
+    profilePicture: doc.profilePicture,
     createdAt: doc.createdAt,
   };
 }
@@ -90,4 +93,4 @@ async function getMe(req, res, next) {
   }
 }
 
-module.exports = { signup, login, getMe };
+module.exports = { signup, login, getMe, toPublicUser };
