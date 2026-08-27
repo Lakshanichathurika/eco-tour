@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
 
 export default function Footer() {
@@ -23,17 +24,35 @@ export default function Footer() {
             <h3 className="font-bold text-2xl mb-6">Quick Links</h3>
 
             <ul className="space-y-3 text-gray-700">
-              <li className="hover:text-green-700 cursor-pointer">Home</li>
-
-              <li className="hover:text-green-700 cursor-pointer">
-                Destination
+              <li>
+                <Link to="/" className="hover:text-green-700 cursor-pointer">
+                  Home
+                </Link>
               </li>
 
-              <li className="hover:text-green-700 cursor-pointer">Plan Trip</li>
+              <li>
+                <Link to="/destination" className="hover:text-green-700 cursor-pointer">
+                  Destination
+                </Link>
+              </li>
 
-              <li className="hover:text-green-700 cursor-pointer">My Trip</li>
+              <li>
+                <Link to="/plantrip" className="hover:text-green-700 cursor-pointer">
+                  Plan Trip
+                </Link>
+              </li>
 
-              <li className="hover:text-green-700 cursor-pointer">Dashboard</li>
+              <li>
+                <Link to="/mytrips" className="hover:text-green-700 cursor-pointer">
+                  My Trip
+                </Link>
+              </li>
+
+              <li>
+                <Link to="/dashboard" className="hover:text-green-700 cursor-pointer">
+                  Dashboard
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -51,17 +70,32 @@ export default function Footer() {
             </ul>
 
             <div className="flex gap-5 mt-8">
-              <div className="w-11 h-11 rounded-full bg-black text-white flex items-center justify-center hover:bg-green-700 cursor-pointer transition">
+              <a
+                href="https://facebook.com/ecoroute"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-11 h-11 rounded-full bg-black text-white flex items-center justify-center hover:bg-green-700 cursor-pointer transition"
+              >
                 <FaFacebookF size={18} />
-              </div>
+              </a>
 
-              <div className="w-11 h-11 rounded-full bg-black text-white flex items-center justify-center hover:bg-green-700 cursor-pointer transition">
+              <a
+                href="https://instagram.com/ecoroute"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-11 h-11 rounded-full bg-black text-white flex items-center justify-center hover:bg-green-700 cursor-pointer transition"
+              >
                 <FaInstagram size={18} />
-              </div>
+              </a>
 
-              <div className="w-11 h-11 rounded-full bg-black text-white flex items-center justify-center hover:bg-green-700 cursor-pointer transition">
+              <a
+                href="https://wa.me/94712345678"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-11 h-11 rounded-full bg-black text-white flex items-center justify-center hover:bg-green-700 cursor-pointer transition"
+              >
                 <FaWhatsapp size={18} />
-              </div>
+              </a>
             </div>
           </div>
         </div>

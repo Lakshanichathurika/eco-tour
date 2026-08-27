@@ -42,7 +42,10 @@ function Hero() {
             Plane My Trip →
           </button>
 
-          <button className="bg-white/20 backdrop-blur-md border border-white text-white px-8 py-4 rounded-full text-lg">
+          <button
+            onClick={() => navigate("/destination")}
+            className="bg-white/20 backdrop-blur-md border border-white text-white px-8 py-4 rounded-full text-lg"
+          >
             Explore Destinations
           </button>
         </div>
