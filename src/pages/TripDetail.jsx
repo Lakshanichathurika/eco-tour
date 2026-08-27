@@ -31,7 +31,7 @@ function TripDetail() {
   return (
     <>
       <Navbar />
-      <section className="bg-stone-50 py-24 min-h-screen">
+      <section className="bg-stone-50 py-12 sm:py-16 md:py-24 min-h-screen">
         <div className="max-w-7xl mx-auto px-6">
           <button
             type="button"

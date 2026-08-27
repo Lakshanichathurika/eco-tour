@@ -61,9 +61,9 @@ function Signup() {
       <div className="min-h-screen bg-black/60">
         <Navbar />
 
-        <div className="flex items-center justify-center px-5 py-16">
-          <div className="w-full max-w-md bg-black/40 backdrop-blur-md border border-white/20 rounded-3xl p-10">
-            <h1 className="text-white text-4xl font-serif text-center mb-8">
+        <div className="flex items-center justify-center px-4 py-10 sm:py-16">
+          <div className="w-full max-w-md bg-black/40 backdrop-blur-md border border-white/20 rounded-3xl p-6 sm:p-10">
+            <h1 className="text-white text-3xl sm:text-4xl font-serif text-center mb-8">
               Create Your Account
             </h1>
 

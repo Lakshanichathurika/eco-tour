@@ -26,7 +26,7 @@ export default function Process() {
         <div className="text-center">
           <p className="text-[#2E6B4F] text-sm font-semibold">Simple Process</p>
 
-          <h2 className="text-[42px] font-bold mt-2">How It Work</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-[42px] font-bold mt-2">How It Work</h2>
 
           <p className="text-gray-500 text-sm mt-4">
             Three simple steps to your perfectly planned eco-adventure.
@@ -38,11 +38,11 @@ export default function Process() {
           {/* Center Line */}
           <div className="hidden md:block absolute top-6 left-[110px] right-[110px] h-[1.5px] bg-gray-300"></div>
 
-          <div className="flex justify-between relative z-10">
+          <div className="flex flex-col md:flex-row md:justify-between relative z-10 gap-10 md:gap-0">
             {steps.map((step) => (
               <div
                 key={step.id}
-                className="w-[260px] flex flex-col items-center text-center"
+                className="w-full md:w-[260px] flex flex-col items-center text-center"
               >
                 {/* Circle */}
                 <div className="w-14 h-14 rounded-full bg-[#E5E7EB] flex items-center justify-center text-sm font-bold shadow-sm">

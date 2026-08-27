@@ -18,13 +18,13 @@ export default function Destinations() {
     <section className="bg-stone-50 py-24">
       <div className="max-w-7xl mx-auto px-6">
         {/* Heading */}
-        <div className="flex items-end justify-between mb-12">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
           <div>
             <p className="text-[#2E6B4F] text-sm font-semibold">
               Curated for you
             </p>
 
-            <h2 className="text-[42px] font-bold mt-2">
+            <h2 className="text-2xl sm:text-3xl md:text-[42px] font-bold mt-2">
               Hand-Picked Destinations
             </h2>
           </div>

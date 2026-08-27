@@ -24,13 +24,13 @@ export default function DirectionsPanel({ legs, travelMode }) {
             <button
               type="button"
               onClick={() => setExpandedKey(isOpen ? null : leg.key)}
-              className="w-full text-left px-6 py-4 font-semibold flex justify-between items-center gap-4"
+              className="w-full text-left px-6 py-4 font-semibold flex justify-between items-center gap-4 min-w-0"
             >
-              <span>
+              <span className="flex-1 min-w-0 truncate">
                 Leg {i + 1}: {leg.from} to {leg.to} — {leg.steps.length} steps
                 {leg.durationText ? `, ~${leg.durationText}` : ""}
               </span>
-              <span className="text-gray-400">{isOpen ? "−" : "+"}</span>
+              <span className="text-gray-400 shrink-0">{isOpen ? "−" : "+"}</span>
             </button>
 
             {isOpen && (

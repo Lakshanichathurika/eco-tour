@@ -33,7 +33,7 @@ export default function DestinationPopup({ destination, onClose }) {
 
         <div className="flex-1 overflow-y-auto px-6 pb-8">
           <div className="rounded-[26px] bg-[#f7f7f5] p-6 shadow-inner">
-            <h2 className="text-4xl font-bold text-[#1f2d2a]">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#1f2d2a]">
               {destination.title}
             </h2>
 
@@ -41,7 +41,7 @@ export default function DestinationPopup({ destination, onClose }) {
               <img
                 src={destination.image}
                 alt={destination.title}
-                className="h-[260px] w-full object-cover"
+                className="h-48 sm:h-[260px] w-full object-cover"
               />
             </div>
 

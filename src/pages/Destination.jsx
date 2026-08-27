@@ -194,11 +194,11 @@ export default function Destination() {
       <Navbar />
       <section className="bg-stone-50 py-24">
         <div className="max-w-7xl mx-auto px-6 py-12">
-          <h1 className="text-4xl font-bold mb-6">{destination.title}</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6">{destination.title}</h1>
           <img
             src={destination.image}
             alt={destination.title}
-            className="w-full h-96 object-cover rounded-2xl mb-8"
+            className="w-full h-56 sm:h-72 md:h-96 object-cover rounded-2xl mb-8"
           />
           <p className="text-lg text-gray-600 leading-8">
             {destination.description}

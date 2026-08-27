@@ -15,10 +15,10 @@ export default function CTA() {
   };
 
   return (
-    <section className="bg-[#F7FBF8] pt-24 pb-24">
+    <section className="bg-[#F7FBF8] pt-12 pb-12 sm:pt-24 sm:pb-24">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="bg-[#1F6A38] rounded-3xl py-16 px-10 text-center shadow-lg">
-          <h2 className="text-5xl font-bold text-white">
+        <div className="bg-[#1F6A38] rounded-3xl py-10 px-5 sm:py-16 sm:px-10 text-center shadow-lg">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
             Ready to explore responsibly?
           </h2>
 
@@ -29,7 +29,7 @@ export default function CTA() {
 
           <button
             onClick={handleStartPlanning}
-            className="mt-10 inline-flex items-center gap-3 bg-white text-gray-900 px-8 py-4 rounded-xl font-semibold shadow hover:scale-105 duration-300"
+            className="mt-10 inline-flex items-center gap-3 bg-white text-gray-900 px-6 py-3 sm:px-8 sm:py-4 rounded-xl font-semibold shadow hover:scale-105 duration-300"
           >
             Starting Planning Free
             <ArrowRight size={18} />

@@ -118,21 +118,21 @@ function Profile() {
       <div className="min-h-screen bg-black/60">
         <Navbar />
 
-        <div className="flex flex-col items-center px-5 py-20 gap-10">
-          <h1 className="text-white text-4xl font-serif text-center">Edit Profile</h1>
+        <div className="flex flex-col items-center px-4 py-12 sm:py-20 gap-10">
+          <h1 className="text-white text-3xl sm:text-4xl font-serif text-center">Edit Profile</h1>
 
           {loading ? (
-            <div className="w-full max-w-md bg-black/40 backdrop-blur-md border border-white/20 rounded-3xl p-10 text-center text-gray-300">
+            <div className="w-full max-w-md bg-black/40 backdrop-blur-md border border-white/20 rounded-3xl p-6 sm:p-10 text-center text-gray-300">
               Loading your profile...
             </div>
           ) : loadError ? (
-            <div className="w-full max-w-md bg-red-950/40 border border-red-400/30 rounded-3xl p-10 text-center text-red-300">
+            <div className="w-full max-w-md bg-red-950/40 border border-red-400/30 rounded-3xl p-6 sm:p-10 text-center text-red-300">
               {loadError}
             </div>
           ) : (
             <>
               {/* Profile form */}
-              <div className="w-full max-w-md bg-black/40 backdrop-blur-md border border-white/20 rounded-3xl p-10">
+              <div className="w-full max-w-md bg-black/40 backdrop-blur-md border border-white/20 rounded-3xl p-6 sm:p-10">
                 <form onSubmit={handleProfileSubmit} className="space-y-5">
                   <div className="flex flex-col items-center gap-3">
                     <div
@@ -228,7 +228,7 @@ function Profile() {
               </div>
 
               {/* Change password */}
-              <div className="w-full max-w-md bg-black/40 backdrop-blur-md border border-white/20 rounded-3xl p-10">
+              <div className="w-full max-w-md bg-black/40 backdrop-blur-md border border-white/20 rounded-3xl p-6 sm:p-10">
                 <h2 className="text-white text-2xl font-serif text-center mb-6">Change Password</h2>
 
                 <form onSubmit={handlePasswordSubmit} className="space-y-5">

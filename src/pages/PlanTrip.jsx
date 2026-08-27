@@ -122,7 +122,7 @@ function PlanTrip() {
 
           <form
             onSubmit={handleSubmit}
-            className="bg-white rounded-2xl shadow-md p-8 grid gap-6 sm:grid-cols-2"
+            className="bg-white rounded-2xl shadow-md p-5 sm:p-8 grid gap-6 sm:grid-cols-2"
           >
             <div>
               <label className="block font-semibold mb-2" htmlFor="budget-slider">

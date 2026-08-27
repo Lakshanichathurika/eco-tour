@@ -179,7 +179,7 @@ function Dashboard() {
                       No saved destinations yet.
                     </div>
                   ) : (
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                       {data.savedDestinations.map((dest) => (
                         <div
                           key={dest.id}

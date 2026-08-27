@@ -36,12 +36,12 @@ function MyTrips() {
 
       <section className="bg-[#f3f3f1] py-16 min-h-screen">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-end justify-between mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
             <div>
-              <h1 className="text-5xl md:text-6xl font-extrabold tracking-[-0.04em] text-[#1f2d2a] leading-none">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-[-0.04em] text-[#1f2d2a] leading-none">
                 My Trips ...
               </h1>
-              <p className="text-[#2D6A52] text-2xl mt-7 font-medium">
+              <p className="text-[#2D6A52] text-lg sm:text-xl md:text-2xl mt-7 font-medium">
                 Your Library
               </p>
             </div>
@@ -77,7 +77,7 @@ function MyTrips() {
                   className="cursor-pointer rounded-[26px] overflow-hidden border border-[#e6e2db] bg-[#f8f8f8] shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
                 >
                   <div
-                    className="h-64 w-full bg-cover bg-center"
+                    className="h-48 sm:h-56 md:h-64 w-full bg-cover bg-center"
                     style={{ backgroundImage: `url(${trip.image})` }}
                   />
 
@@ -101,7 +101,7 @@ function MyTrips() {
                       </p>
                     )}
 
-                    <div className="mt-4 flex items-center justify-between text-sm text-[#4a4d48]">
+                    <div className="mt-4 flex items-center justify-between flex-wrap gap-x-3 gap-y-1 text-sm text-[#4a4d48]">
                       {trip.travelersLabel && <span>{trip.travelersLabel}</span>}
                       <span>{trip.price}</span>
                       <span>{trip.distance}</span>

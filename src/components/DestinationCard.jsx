@@ -22,7 +22,7 @@ export default function DestinationCard({
         onKeyDown={handleKey}
         className="cursor-pointer"
       >
-        <img src={image} alt={title} className="w-full h-64 object-cover" />
+        <img src={image} alt={title} className="w-full h-48 sm:h-56 md:h-64 object-cover" />
       </div>
 
       <div className="p-6 flex flex-col flex-1">

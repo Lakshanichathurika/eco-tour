@@ -34,7 +34,7 @@ export default function TripResultsView({
   return (
     <div className="mt-16">
       <div className="flex items-end justify-between mb-8 flex-wrap gap-4">
-        <h2 className="text-3xl font-bold">Suggested Itinerary</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold">Suggested Itinerary</h2>
         <div className="text-gray-600 text-right">
           <p>
             <span className="font-semibold text-green-700">{total_places}</span>{" "}
@@ -105,15 +105,17 @@ export default function TripResultsView({
                     expandedStopId === stop.destination_id ? null : stop.destination_id
                   )
                 }
-                className="flex items-center gap-1 text-sm text-green-700 font-semibold mt-2"
+                className="flex items-center gap-1 text-sm text-green-700 font-semibold mt-2 min-w-0"
               >
-                Rs {stop.destination_total_cost_lkr.toLocaleString()} (Rs{" "}
-                {stop.entry_fee_per_person_lkr.toLocaleString()} x {travelers} traveler
-                {Number(travelers) === 1 ? "" : "s"} + Rs{" "}
-                {stop.shared_group_cost_lkr.toLocaleString()} shared)
+                <span className="min-w-0">
+                  Rs {stop.destination_total_cost_lkr.toLocaleString()} (Rs{" "}
+                  {stop.entry_fee_per_person_lkr.toLocaleString()} x {travelers} traveler
+                  {Number(travelers) === 1 ? "" : "s"} + Rs{" "}
+                  {stop.shared_group_cost_lkr.toLocaleString()} shared)
+                </span>
                 <ChevronDown
                   size={16}
-                  className={`transition-transform ${
+                  className={`shrink-0 transition-transform ${
                     expandedStopId === stop.destination_id ? "rotate-180" : ""
                   }`}
                 />

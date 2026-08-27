@@ -149,14 +149,14 @@ export default function MapView({
 
   if (!MAPS_API_KEY) {
     return (
-      <div className="w-full h-80 flex items-center justify-center text-sm text-gray-500 bg-stone-100 rounded-2xl border border-dashed border-stone-300">
+      <div className="w-full h-56 sm:h-72 md:h-80 flex items-center justify-center text-sm text-gray-500 bg-stone-100 rounded-2xl border border-dashed border-stone-300">
         Map unavailable — set VITE_GOOGLE_MAPS_API_KEY in eco-tour/.env to enable it.
       </div>
     );
   }
 
   return (
-    <div className="w-full h-80 rounded-2xl overflow-hidden shadow-md">
+    <div className="w-full h-56 sm:h-72 md:h-80 rounded-2xl overflow-hidden shadow-md">
       <MapInner
         itinerary={itinerary}
         travelMode={travelMode}
