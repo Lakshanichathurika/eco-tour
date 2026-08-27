@@ -38,10 +38,10 @@ export async function getNearbyPlaces(lat, lng) {
   return json.data;
 }
 
-export async function saveTrip(payload) {
+export async function saveTrip(payload, token) {
   const res = await fetch(`${API_BASE}/trips`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
     body: JSON.stringify(payload),
   });
   const json = await res.json();
@@ -49,23 +49,41 @@ export async function saveTrip(payload) {
   return json.data;
 }
 
-export async function getTrips(clientId) {
-  const res = await fetch(`${API_BASE}/trips?client_id=${encodeURIComponent(clientId)}`);
+export async function getTrips(token) {
+  const res = await fetch(`${API_BASE}/trips`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
   const json = await res.json();
   if (!json.success) throw new Error(json.message || "Failed to fetch trips");
   return json.data;
 }
 
-export async function getTripById(id, clientId) {
-  const res = await fetch(`${API_BASE}/trips/${id}?client_id=${encodeURIComponent(clientId)}`);
+export async function getTripById(id, token) {
+  const res = await fetch(`${API_BASE}/trips/${id}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
   if (res.status === 404) return null;
   const json = await res.json();
   if (!json.success) throw new Error(json.message || "Failed to fetch trip");
   return json.data;
 }
 
-export async function deleteTrip(id) {
-  const res = await fetch(`${API_BASE}/trips/${id}`, { method: "DELETE" });
+export async function updateTrip(id, notes, token) {
+  const res = await fetch(`${API_BASE}/trips/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+    body: JSON.stringify({ notes }),
+  });
+  const json = await res.json();
+  if (!json.success) throw new Error(json.message || "Failed to update trip");
+  return json.data;
+}
+
+export async function deleteTrip(id, token) {
+  const res = await fetch(`${API_BASE}/trips/${id}`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${token}` },
+  });
   const json = await res.json();
   if (!json.success) throw new Error(json.message || "Failed to delete trip");
   return json.data;

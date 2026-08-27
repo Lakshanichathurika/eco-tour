@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { MdDelete } from "react-icons/md";
 import { FaTimes } from "react-icons/fa";
 import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Destination from "./pages/Destination";
@@ -22,10 +23,31 @@ function App() {
           <Route path="/destination" element={<Destination />} />
           <Route path="/destination/:id" element={<Destination />} />
 
-          <Route path="/plantrip" element={<PlanTrip />} />
+          <Route
+            path="/plantrip"
+            element={
+              <ProtectedRoute message="Please login to plan your trip.">
+                <PlanTrip />
+              </ProtectedRoute>
+            }
+          />
 
-          <Route path="/mytrips" element={<MyTrips />} />
-          <Route path="/mytrips/:tripId" element={<TripDetail />} />
+          <Route
+            path="/mytrips"
+            element={
+              <ProtectedRoute message="Please login to view your trips.">
+                <MyTrips />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/mytrips/:tripId"
+            element={
+              <ProtectedRoute message="Please login to view your trips.">
+                <TripDetail />
+              </ProtectedRoute>
+            }
+          />
 
           <Route path="/dashboard" element={<Dashboard />} />
 

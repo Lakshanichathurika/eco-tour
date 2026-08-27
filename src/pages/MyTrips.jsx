@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { MdDelete } from "react-icons/md";
 import { getTrips, deleteTrip } from "../lib/api";
-import { getClientId } from "../utils/clientId";
+import { useAuth } from "../context/AuthContext";
 import ellaImg from "../assets/ella.jpg";
 import sigiriyaImg from "../assets/sigiriya.jpg";
 import sinharajaImg from "../assets/sinharaja.jpg";
@@ -75,19 +75,21 @@ function toCard(trip, index) {
 
 function MyTrips() {
   const navigate = useNavigate();
+  const { token } = useAuth();
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    getTrips(getClientId())
+    getTrips(token)
       .then((data) => setTrips(data.map(toCard)))
-      .catch((err) => console.warn("Failed to load trips:", err))
+      .catch(() => setError("Couldn't load your trips. Please try again."))
       .finally(() => setLoading(false));
-  }, []);
+  }, [token]);
 
   const handleDelete = async (id) => {
     try {
-      await deleteTrip(id);
+      await deleteTrip(id, token);
       setTrips((currentTrips) => currentTrips.filter((trip) => trip.id !== id));
     } catch (err) {
       console.warn("Failed to delete trip:", err);
@@ -123,6 +125,10 @@ function MyTrips() {
           {loading ? (
             <div className="rounded-2xl border border-dashed border-[#b5c8bf] bg-[#f8f8f8] p-12 text-center text-[#3a524a]">
               Loading your trips...
+            </div>
+          ) : error ? (
+            <div className="rounded-2xl border border-dashed border-red-300 bg-red-50 p-12 text-center text-red-700">
+              {error}
             </div>
           ) : trips.length === 0 ? (
             <div className="rounded-2xl border border-dashed border-[#b5c8bf] bg-[#f8f8f8] p-12 text-center text-[#3a524a]">

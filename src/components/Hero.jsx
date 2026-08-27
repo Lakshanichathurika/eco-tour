@@ -1,6 +1,19 @@
+import { useNavigate } from "react-router-dom";
 import hero from "../assets/hero.jpg";
+import { useAuth } from "../context/AuthContext";
 
 function Hero() {
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
+  const handlePlanTrip = () => {
+    if (user) {
+      navigate("/plantrip");
+    } else {
+      navigate("/login", { state: { message: "Please login to plan your trip." } });
+    }
+  };
+
   return (
     <section
       className="h-screen bg-cover bg-center"
@@ -22,7 +35,10 @@ function Hero() {
         </p>
 
         <div className="mt-12 flex gap-6 flex-wrap justify-center">
-          <button className="bg-yellow-400 hover:bg-yellow-500 text-black px-8 py-4 rounded-full text-lg font-semibold">
+          <button
+            onClick={handlePlanTrip}
+            className="bg-yellow-400 hover:bg-yellow-500 text-black px-8 py-4 rounded-full text-lg font-semibold"
+          >
             Plane My Trip →
           </button>
 

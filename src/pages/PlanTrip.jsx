@@ -7,7 +7,7 @@ import DestinationCard from "../components/DestinationCard";
 import TripResultsView from "../components/TripResultsView";
 import { VEHICLE_TYPE_GROUPS } from "../constants/vehicleTypes";
 import { postRecommendations, saveTrip } from "../lib/api";
-import { getClientId } from "../utils/clientId";
+import { useAuth } from "../context/AuthContext";
 
 const INTERESTS = ["wildlife", "hiking", "culture", "beach"];
 
@@ -20,6 +20,7 @@ function budgetLkrToTier(value) {
 }
 
 function PlanTrip() {
+  const { token } = useAuth();
   const [budgetLkr, setBudgetLkr] = useState(60000);
   const [duration, setDuration] = useState(3);
   const [travelers, setTravelers] = useState(2);
@@ -86,14 +87,16 @@ function PlanTrip() {
           // Auto-save to trip history — no "Save trip" affordance exists in
           // this UI, so a failed save here shouldn't block or alarm the user
           // over a result that already rendered successfully.
-          saveTrip({
-            client_id: getClientId(),
-            preferences: payload,
-            itinerary: response.itinerary,
-            total_estimated_cost_lkr: response.total_estimated_cost_lkr,
-            estimated_transport_cost_lkr: response.estimated_transport_cost_lkr,
-            total_distance_km: response.total_distance_km,
-          }).catch((err) => console.warn("Failed to save trip:", err));
+          saveTrip(
+            {
+              preferences: payload,
+              itinerary: response.itinerary,
+              total_estimated_cost_lkr: response.total_estimated_cost_lkr,
+              estimated_transport_cost_lkr: response.estimated_transport_cost_lkr,
+              total_distance_km: response.total_distance_km,
+            },
+            token
+          ).catch((err) => console.warn("Failed to save trip:", err));
         }
       }
     } catch (err) {

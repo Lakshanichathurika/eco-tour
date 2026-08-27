@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import heroImg from "../assets/hero.jpg";
 import Navbar from "../components/Navbar";
 import { useAuth } from "../context/AuthContext";
@@ -7,7 +7,9 @@ import { login as loginRequest } from "../lib/api";
 
 function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { login } = useAuth();
+  const redirectMessage = location.state?.message;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -47,6 +49,12 @@ function Login() {
             <h1 className="text-white text-4xl font-serif text-center mb-8">
               Welcome Back
             </h1>
+
+            {redirectMessage && (
+              <p className="text-yellow-300 text-sm text-center mb-6 bg-yellow-400/10 border border-yellow-400/30 rounded-xl py-2 px-4">
+                {redirectMessage}
+              </p>
+            )}
 
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>

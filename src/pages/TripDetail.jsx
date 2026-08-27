@@ -4,17 +4,19 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import TripResultsView from "../components/TripResultsView";
 import { getTripById } from "../lib/api";
-import { getClientId } from "../utils/clientId";
+import { useAuth } from "../context/AuthContext";
 
 function TripDetail() {
   const { tripId } = useParams();
   const navigate = useNavigate();
+  const { token } = useAuth();
   const [trip, setTrip] = useState(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    getTripById(tripId, getClientId())
+    getTripById(tripId, token)
       .then((data) => {
         if (!data) {
           setNotFound(true);
@@ -22,9 +24,9 @@ function TripDetail() {
           setTrip(data);
         }
       })
-      .catch(() => setNotFound(true))
+      .catch((err) => setError(err.message || "Couldn't load this trip."))
       .finally(() => setLoading(false));
-  }, [tripId]);
+  }, [tripId, token]);
 
   return (
     <>
@@ -46,6 +48,10 @@ function TripDetail() {
           ) : notFound ? (
             <div className="rounded-2xl border border-dashed border-stone-300 bg-white p-12 text-center text-stone-500">
               This trip couldn't be found.
+            </div>
+          ) : error ? (
+            <div className="rounded-2xl border border-dashed border-red-300 bg-red-50 p-12 text-center text-red-700">
+              {error}
             </div>
           ) : (
             <TripResultsView
