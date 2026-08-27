@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true, lowercase: true, trim: true },
   // Always a bcrypt hash — never a plain-text password.
   password: { type: String, required: true },
+  savedDestinations: [{ type: mongoose.Schema.Types.ObjectId, ref: "Destination" }],
   createdAt: { type: Date, default: Date.now },
 });
 

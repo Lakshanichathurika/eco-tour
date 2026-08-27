@@ -10,6 +10,7 @@ import PlanTrip from "./pages/PlanTrip";
 import MyTrips from "./pages/MyTrips";
 import TripDetail from "./pages/TripDetail";
 import Dashboard from "./pages/Dashboard";
+import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
@@ -49,7 +50,22 @@ function App() {
             }
           />
 
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute message="Please login to view your dashboard.">
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute message="Please login to view your profile.">
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
 
           <Route path="/login" element={<Login />} />
 

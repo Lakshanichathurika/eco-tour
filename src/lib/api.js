@@ -119,3 +119,32 @@ export async function getMe(token) {
   if (!json.success) throw new Error(json.message || "Failed to fetch user");
   return json.data;
 }
+
+export async function getDashboard(token) {
+  const res = await fetch(`${API_BASE}/dashboard`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  const json = await res.json();
+  if (!json.success) throw new Error(json.message || "Failed to fetch dashboard");
+  return json.data;
+}
+
+export async function saveDestination(destId, token) {
+  const res = await fetch(`${API_BASE}/users/save-destination/${destId}`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  const json = await res.json();
+  if (!json.success) throw new Error(json.message || "Failed to save destination");
+  return json;
+}
+
+export async function unsaveDestination(destId, token) {
+  const res = await fetch(`${API_BASE}/users/save-destination/${destId}`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  const json = await res.json();
+  if (!json.success) throw new Error(json.message || "Failed to remove destination");
+  return json;
+}
