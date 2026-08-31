@@ -17,7 +17,7 @@ const app = express();
 // Render (and similar hosts) sit behind a reverse proxy — without this,
 // req.protocol always reports "http" even for real https:// requests, which
 // would leak into any URL built from it (e.g. destination image URLs).
-app.set("trust proxy", true);
+app.set("trust proxy", 1);
 
 app.use(cors({ origin: process.env.CORS_ORIGIN || "http://localhost:5173" }));
 // Default 100kb is too small for a base64-encoded profile picture (up to
